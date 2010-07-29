@@ -197,6 +197,9 @@ function! s:synname()
     return synIDattr(synID(line('.'),col('.'),0),'name')
 endfunction
 
+"Load ri interface
+source ~/.vim/ftplugin/ri.vim
+
 "
 " Instructions for enabling "matchit" support:
 "

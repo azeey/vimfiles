@@ -18,47 +18,47 @@ set nowrap      "dont wrap lines
 set linebreak   "wrap lines at convenient points
 
 "statusline setup
-set statusline=%f       "tail of the filename
-
-"display a warning if fileformat isnt unix
-set statusline+=%#warningmsg#
-set statusline+=%{&ff!='unix'?'['.&ff.']':''}
-set statusline+=%*
-
-"display a warning if file encoding isnt utf-8
-set statusline+=%#warningmsg#
-set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-set statusline+=%*
-
-set statusline+=%h      "help file flag
-set statusline+=%y      "filetype
-set statusline+=%r      "read only flag
-set statusline+=%m      "modified flag
-
-"display a warning if &et is wrong, or we have mixed-indenting
-set statusline+=%#error#
-set statusline+=%{StatuslineTabWarning()}
-set statusline+=%*
-
-set statusline+=%{StatuslineTrailingSpaceWarning()}
-
-set statusline+=%{StatuslineLongLineWarning()}
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-"display a warning if &paste is set
-set statusline+=%#error#
-set statusline+=%{&paste?'[paste]':''}
-set statusline+=%*
-
-set statusline+=%=      "left/right separator
-set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
-set laststatus=2
+"set statusline=%f       "tail of the filename
+"
+""display a warning if fileformat isnt unix
+"set statusline+=%#warningmsg#
+"set statusline+=%{&ff!='unix'?'['.&ff.']':''}
+"set statusline+=%*
+"
+""display a warning if file encoding isnt utf-8
+"set statusline+=%#warningmsg#
+"set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+"set statusline+=%*
+"
+"set statusline+=%h      "help file flag
+"set statusline+=%y      "filetype
+"set statusline+=%r      "read only flag
+"set statusline+=%m      "modified flag
+"
+""display a warning if &et is wrong, or we have mixed-indenting
+"set statusline+=%#error#
+"set statusline+=%{StatuslineTabWarning()}
+"set statusline+=%*
+"
+"set statusline+=%{StatuslineTrailingSpaceWarning()}
+"
+"set statusline+=%{StatuslineLongLineWarning()}
+"
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+""display a warning if &paste is set
+"set statusline+=%#error#
+"set statusline+=%{&paste?'[paste]':''}
+"set statusline+=%*
+"
+"set statusline+=%=      "left/right separator
+"set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
+"set statusline+=%c,     "cursor column
+"set statusline+=%l/%L   "cursor line/total lines
+"set statusline+=\ %P    "percent through file
+"set laststatus=2
 
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
@@ -167,38 +167,16 @@ function! s:Median(nums)
     endif
 endfunction
 
-"indent settings
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-set autoindent
-
-"folding settings
-set foldmethod=indent   "fold based on indent
-set foldnestmax=3       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
-
 set wildmode=list:longest   "make cmdline tab completion similar to bash
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 
 "display tabs and trailing spaces
 set list
-set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+"set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+set listchars=tab:\ \ ,trail:⋅,nbsp:⋅
 
 set formatoptions-=o "dont continue comments when pushing o/O
-
-"vertical/horizontal scroll off settings
-set scrolloff=3
-set sidescrolloff=7
-set sidescroll=1
-
-"load ftplugins and indent files
-filetype plugin on
-filetype indent on
-
-"turn on syntax highlighting
-syntax on
 
 "some stuff to get the mouse going in term
 set mouse=a
@@ -207,13 +185,10 @@ set ttymouse=xterm2
 "tell the term has 256 colors
 set t_Co=256
 
-"hide buffers when not displayed
-set hidden
-
 "dont load csapprox if we no gui support - silences an annoying warning
-if !has("gui")
-    let g:CSApprox_loaded = 1
-endif
+"if !has("gui")
+let g:CSApprox_loaded = 1
+"endif
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
