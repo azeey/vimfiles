@@ -3,8 +3,11 @@
 " Global Stuff
 "-----------------------------------------------------------------------------
 
+filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+
+let mapleader = ","
 
 "Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
@@ -766,3 +769,4 @@ map <F12> :!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q .<CR>
 imap jj <Esc>
 cnoremap <C-K> <Up>
 cnoremap <C-J> <Down>
+nmap ; :
