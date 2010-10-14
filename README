@@ -1,0 +1,17 @@
+Installation:
+
+    git clone git://github.com/azeey/devtool_settings ~/devtool_settings
+
+Create symlinks:
+
+    ln -s ~/devtool_settings/.vim/ ~/.vim
+    ln -s ~/devtool_settings/.vim/vimrc ~/.vimrc
+
+    ln -s ~/devtool_settings/.tmux ~/.tmux
+    ln -s ~/devtool_settings/.zshrc ~/.zshrc
+
+Switch to the `~/.vim` directory, and fetch submodules:
+
+    cd ~/.vim
+    git submodule init
+    git submodule update
