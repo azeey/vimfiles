@@ -6,6 +6,9 @@
 filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+" Set filetype stuff to on
+"filetype on
+filetype plugin indent on
 
 let mapleader = ","
 
@@ -30,7 +33,7 @@ set linebreak   "wrap lines at convenient points
 
 
 "recalculate the trailing whitespace warning when idle, and after saving
-autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
+"autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
 
 "return '[\s]' if trailing white space is detected
 "return '' otherwise
@@ -57,7 +60,7 @@ function! StatuslineCurrentHighlight()
 endfunction
 
 "recalculate the tab warning flag when idle and after writing
-autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
+"autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
 
 "return '[&et]' if &et is set wrong
 "return '[mixed-indenting]' if spaces and tabs are used to indent
@@ -79,7 +82,7 @@ function! StatuslineTabWarning()
 endfunction
 
 "recalculate the long line warning when idle and after saving
-autocmd cursorhold,bufwritepost * unlet! b:statusline_long_line_warning
+"autocmd cursorhold,bufwritepost * unlet! b:statusline_long_line_warning
 
 "return a warning for "long lines" where "long" is either &textwidth or 80 (if
 "no &textwidth is set)
@@ -206,16 +209,12 @@ function! s:HighlightLongLines(width)
         echomsg "Usage: HighlightLongLines [natural number]"
     endif
 endfunction
-" Set filetype stuff to on
-filetype on
-filetype plugin on
-filetype indent on
 
 
-" Tabstops are 3 spaces
-set tabstop=3
-set softtabstop=3
-set shiftwidth=3
+" Tabstops are 4 spaces
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 
 " Show line numbers
 set nu
@@ -338,7 +337,7 @@ set incsearch
 
 " Initial path seeding
 set path=.
-set path+=/usr/include/**
+"set path+=/usr/include/**
 
 " Set the tags files to be the following
 set tags=./tags,tags
@@ -432,7 +431,7 @@ nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
 set synmaxcol=2048
 
 " I don't like it when the matching parens are automatically highlighted
-let loaded_matchparen = 1
+"let loaded_matchparen = 1
 
 "-----------------------------------------------------------------------------
 " MiniBufExplorer Plugin Settings
@@ -495,18 +494,6 @@ let NERDTreeIgnore=[ '\.ncb$', '\.suo$', '\.vcproj\.RIMNET', '\.obj$',
             \ '\.embed\.manifest$', '\.embed\.manifest.res$',
             \ '\.intermediate\.manifest$', '^mt.dep$' ]
 
-"-----------------------------------------------------------------------------
-" FSwitch Settings
-"-----------------------------------------------------------------------------
-nmap <silent> ,of :FSHere<CR>
-nmap <silent> ,ol :FSRight<CR>
-nmap <silent> ,oL :FSSplitRight<CR>
-nmap <silent> ,oh :FSLeft<CR>
-nmap <silent> ,oH :FSSplitLeft<CR>
-nmap <silent> ,ok :FSAbove<CR>
-nmap <silent> ,oK :FSSplitAbove<CR>
-nmap <silent> ,oj :FSBelow<CR>
-nmap <silent> ,oJ :FSSplitBelow<CR>
 
 "-----------------------------------------------------------------------------
 " SnipMate Settings
@@ -678,15 +665,10 @@ nmap <silent> ,x "_x
 nmap <silent> ,c :set cursorline! <CR>
 
 
-set grepprg=ack 
-set grepformat=%f:%l:%c:%m
+"set grepprg=ack 
+"set grepformat=%f:%l:%c:%m
 
-nmap <silent> ,mt \mt
-nmap <silent> ,mh \mh
-nmap <silent> ,ma \ma
-nmap <silent> ,mm \mm
-
-"let g:showmarks_enable = 1
+let g:showmarks_enable = 0
 "hi SignColumn guibg=NONE
 nmap <F6> :TlistToggle<CR>
 
@@ -710,23 +692,17 @@ let g:manpageview_options_rb= ";-f;-q"
 autocmd FileType python setlocal omnifunc=pysmell#Complete
 
 "Tskeleton settings
-let g:tskelUserName = "Addisu Z. Taddese"
-let g:tskelUserEmail = "addisu.taddese@ciholas.com"
-let g:tskelUserWWW = "http://www.ciholas.com"
-autocmd BufNewFile *.py TSkeletonSetup python.py
-autocmd BufNewFile *.cpp TSkeletonSetup cpp.cpp
+"let g:tskelUserName = "Addisu Z. Taddese"
+"let g:tskelUserEmail = "addisu.taddese@ciholas.com"
+"let g:tskelUserWWW = "http://www.ciholas.com"
+"autocmd BufNewFile *.py TSkeletonSetup python.py
+"autocmd BufNewFile *.cpp TSkeletonSetup cpp.cpp
 
-set tabstop=3
-set sts=3
-set shiftwidth=3
 
 
 "ConqueTerm
 let g:ConqueTerm_TERM='xterm'
 
-set tabstop=3
-set sts=3
-set shiftwidth=3
 " Display <tab>s etc...
 set list
 " Some cool display variants for tabs (which will almost certainly break if
@@ -742,6 +718,7 @@ set list
 
 "set lcs=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:&
 "set lcs=tab:└─,trail:·,extends:>,precedes:<,nbsp:&
+"set lcs=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
 set lcs=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
 " formatoptions:
 " c - autowrap COMMENTS using textwidth
@@ -764,9 +741,15 @@ endfunction
 
 nmap ,h :call SwitchSourceHeader()<CR>
 
-map <F12> :!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <silent> <F12> :!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q .<CR>
 
-imap jj <Esc>
+inoremap jj <Esc>
 cnoremap <C-K> <Up>
 cnoremap <C-J> <Down>
 nmap ; :
+
+let g:syntastic_disabled_filetypes = ['c', 'cpp']
+set csto=1
+
+" Make supertab not colide with endwise
+let g:SuperTabCrMapping = 0
