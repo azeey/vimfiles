@@ -753,3 +753,4 @@ set csto=1
 
 " Make supertab not colide with endwise
 let g:SuperTabCrMapping = 0
+let g:SvnVimDiffStyle=""

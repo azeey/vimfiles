@@ -49,3 +49,6 @@
 [submodule "bundle/showmarks"]
 	path = bundle/showmarks
 	url = http://github.com/vim-scripts/ShowMarks.git
+[submodule "bundle/svn"]
+	path = bundle/svn
+	url = https://github.com/scyn-conf/svn-vim.git
