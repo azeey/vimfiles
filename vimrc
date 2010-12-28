@@ -166,7 +166,7 @@ inoremap <C-L> <C-O>:nohls<CR>
 
 
 "map Q to something useful
-noremap Q gq
+"noremap Q gq
 
 "make Y consistent with C and D
 nnoremap Y y$
