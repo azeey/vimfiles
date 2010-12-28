@@ -533,7 +533,9 @@ nmap ,fb :FufBuffer<CR>
 nmap ,t :FufBufferTag<CR>
 nmap ,ff :FufFile<CR>
 nmap ,ft :FufTag<CR>
+nmap ,fj :FufJumpList<CR>
 nmap <C-B> :FufBuffer<CR>
+nmap ,= =i{
 "map to fuzzy finder text mate stylez
 "nnoremap <C-f> :FuzzyFinderTaggedFile<CR>
 nnoremap <C-f> :FufTaggedFile<CR>
@@ -679,8 +681,6 @@ set updatetime=500
 "autocmd BufNewFile,BufRead *.mxml,*.as :nmap <C-B> :!bash ~/bin/fcshcmp.sh %:p
 autocmd BufNewFile,BufRead *.mxml,*.as :nmap <C-B> :!~/bin/fcshcmp.sh %:p run
 
-nmap <S-t> <C-t>
-nmap <S-]> <C-]>
 
 "Manpageviewer extensions
 let g:manpageview_pgm_py = "pydoc"
@@ -690,6 +690,10 @@ let g:manpageview_pgm_rb = "ri"
 let g:manpageview_options_rb= ";-f;-q"
 
 autocmd FileType python setlocal omnifunc=pysmell#Complete
+autocmd FileType python set sw=4 sts=4 ts=4
+autocmd FileType ruby set sw=2 sts=2 ts=2
+autocmd FileType cpp set sw=3 sts=3 ts=3
+autocmd FileType c set sw=3 sts=3 ts=3
 
 "Tskeleton settings
 "let g:tskelUserName = "Addisu Z. Taddese"
@@ -746,7 +750,10 @@ map <silent> <F12> :!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=
 inoremap jj <Esc>
 cnoremap <C-K> <Up>
 cnoremap <C-J> <Down>
-nmap ; :
+"nmap ; :
+nmap ci; ciw;
+nmap ciw; diwct;
+nmap caw; dawct;
 
 let g:syntastic_disabled_filetypes = ['c', 'cpp']
 set csto=1
@@ -754,3 +761,6 @@ set csto=1
 " Make supertab not colide with endwise
 let g:SuperTabCrMapping = 0
 let g:SvnVimDiffStyle=""
+
+let ropevim_vim_completion=1
+let ropevim_extended_complete=1
