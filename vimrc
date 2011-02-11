@@ -248,7 +248,10 @@ set hidden
 "set cpoptions=ces$
 
 " Set the status line the way i like it
-set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]
+set statusline=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
@@ -691,18 +694,10 @@ let g:manpageview_options_rb= ";-f;-q"
 
 autocmd FileType python setlocal omnifunc=pysmell#Complete
 autocmd FileType python set sw=4 sts=4 ts=4
+"autocmd FileType python set sw=2 sts=2 ts=2
 autocmd FileType ruby set sw=2 sts=2 ts=2
 autocmd FileType cpp set sw=3 sts=3 ts=3
 autocmd FileType c set sw=3 sts=3 ts=3
-
-"Tskeleton settings
-"let g:tskelUserName = "Addisu Z. Taddese"
-"let g:tskelUserEmail = "addisu.taddese@ciholas.com"
-"let g:tskelUserWWW = "http://www.ciholas.com"
-"autocmd BufNewFile *.py TSkeletonSetup python.py
-"autocmd BufNewFile *.cpp TSkeletonSetup cpp.cpp
-
-
 
 "ConqueTerm
 let g:ConqueTerm_TERM='xterm'
@@ -764,3 +759,4 @@ let g:SvnVimDiffStyle=""
 
 let ropevim_vim_completion=1
 let ropevim_extended_complete=1
+let g:syntastic_auto_loc_list=1
