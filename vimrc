@@ -360,7 +360,7 @@ nmap <silent> ,n :set invhls<CR>:set hls?<CR>
 
 " put the vim directives for my file editing settings in
 nmap <silent> ,vi
-     \ ovim:set ts=3 sts=3 sw=3:<CR>vim600:fdm=marker fdl=1 fdc=0:<ESC>
+     \ ovim:set ts=4 sts=4 sw=4:<CR>vim600:fdm=marker fdl=1 fdc=0:<ESC>
 
 " Show all available VIM servers
 nmap <silent> ,ss :echo serverlist()<CR>
@@ -682,7 +682,7 @@ set updatetime=500
 "autocmd FileType python setlocal omnifunc=pysmell#Complete
 
 "autocmd BufNewFile,BufRead *.mxml,*.as :nmap <C-B> :!bash ~/bin/fcshcmp.sh %:p
-autocmd BufNewFile,BufRead *.mxml,*.as :nmap <C-B> :!~/bin/fcshcmp.sh %:p run
+"autocmd BufNewFile,BufRead *.mxml,*.as :nmap <C-B> :!~/bin/fcshcmp.sh %:p run
 
 
 "Manpageviewer extensions
@@ -696,8 +696,8 @@ autocmd FileType python setlocal omnifunc=pysmell#Complete
 autocmd FileType python set sw=4 sts=4 ts=4
 "autocmd FileType python set sw=2 sts=2 ts=2
 autocmd FileType ruby set sw=2 sts=2 ts=2
-autocmd FileType cpp set sw=3 sts=3 ts=3
-autocmd FileType c set sw=3 sts=3 ts=3
+autocmd FileType cpp set sw=4 sts=4 ts=4
+autocmd FileType c set sw=4 sts=4 ts=4
 
 "ConqueTerm
 let g:ConqueTerm_TERM='xterm'
@@ -741,6 +741,11 @@ endfunction
 nmap ,h :call SwitchSourceHeader()<CR>
 
 map <silent> <F12> :!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q .<CR>
+function! s:Ctag(dir)
+    echomsg "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q " . a:dir
+    exec "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q " . a:dir
+endfunction
+command! -nargs=1 -complete=dir Ctag call s:Ctag('<args>')
 
 inoremap jj <Esc>
 cnoremap <C-K> <Up>
@@ -752,6 +757,7 @@ nmap caw; dawct;
 
 let g:syntastic_disabled_filetypes = ['c', 'cpp']
 set csto=1
+set nocst
 
 " Make supertab not colide with endwise
 let g:SuperTabCrMapping = 0
@@ -759,4 +765,14 @@ let g:SvnVimDiffStyle=""
 
 let ropevim_vim_completion=1
 let ropevim_extended_complete=1
-let g:syntastic_auto_loc_list=1
+"let g:syntastic_auto_loc_list=1
+
+"Gundo mapping
+nnoremap <F4> :GundoToggle<CR>
+
+set undofile
+set undodir=/tmp/
+
+"Convert unix epoch time to datetime.  Removes the last 3 digits assuming that they are milliseconds
+nnoremap <Leader>e :echo system("date +%c -u -d @" . <C-r><C-w><del><del><del>)<CR>
+nnoremap <Leader>ec :echo system("date +%c -d @" . <C-r><C-w>)<CR>
