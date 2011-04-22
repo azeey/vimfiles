@@ -767,11 +767,13 @@ let ropevim_vim_completion=1
 let ropevim_extended_complete=1
 "let g:syntastic_auto_loc_list=1
 
-"Gundo mapping
-nnoremap <F4> :GundoToggle<CR>
+if version >= 703
+    "Gundo mapping
+    nnoremap <F4> :GundoToggle<CR>
 
-set undofile
-set undodir=/tmp/
+    set undofile
+    set undodir=/tmp/
+end
 
 "Convert unix epoch time to datetime.  Removes the last 3 digits assuming that they are milliseconds
 nnoremap <Leader>e :echo system("date +%c -u -d @" . <C-r><C-w><del><del><del>)<CR>
