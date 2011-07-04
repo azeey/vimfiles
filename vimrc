@@ -637,7 +637,7 @@ iab Fone      Phone
 if has("gui_running")
     "colors desert  
     colors twilight2
-    set guifont=Monaco\ 11.5
+    set guifont=Monaco
     "set guifont=Terminus\ 13.5
     runtime ftplugin/man.vim
     "nmap K :Man <cword><CR>
@@ -778,3 +778,7 @@ end
 "Convert unix epoch time to datetime.  Removes the last 3 digits assuming that they are milliseconds
 nnoremap <Leader>e :echo system("date +%c -u -d @" . <C-r><C-w><del><del><del>)<CR>
 nnoremap <Leader>ec :echo system("date +%c -d @" . <C-r><C-w>)<CR>
+
+
+" Blog
+let VIMPRESS = [{'username':'azeey', 'blog_url': 'http://addisu.taddese.com/blog/'}]
