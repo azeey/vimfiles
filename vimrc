@@ -630,6 +630,7 @@ iab seperate  separate
 iab Seperate  Separate
 iab fone      phone
 iab Fone      Phone
+iab unnec     unnecessary
 
 "-----------------------------------------------------------------------------
 " Set up the window colors and size
@@ -674,6 +675,7 @@ nmap <silent> ,c :set cursorline! <CR>
 "set grepformat=%f:%l:%c:%m
 
 let g:showmarks_enable = 0
+nmap <F3> :ShowMarksToggle<CR>
 "hi SignColumn guibg=NONE
 nmap <F6> :TlistToggle<CR>
 
