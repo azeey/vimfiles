@@ -144,6 +144,7 @@ set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 
 set formatoptions-=o "dont continue comments when pushing o/O
+set formatoptions+=tc "Auto-wrap texts and comments
 
 "some stuff to get the mouse going in term
 set mouse=a
@@ -637,7 +638,7 @@ iab Fone      Phone
 if has("gui_running")
     "colors desert  
     colors twilight2
-    set guifont=Monaco\ 11.5
+    set guifont=Monaco\ 13.5
     "set guifont=Terminus\ 13.5
     runtime ftplugin/man.vim
     "nmap K :Man <cword><CR>
@@ -759,4 +760,4 @@ let g:SvnVimDiffStyle=""
 
 let ropevim_vim_completion=1
 let ropevim_extended_complete=1
-let g:syntastic_auto_loc_list=1
+"let g:syntastic_auto_loc_list=1
