@@ -58,3 +58,15 @@
 [submodule "bundle/textobj-rubyblock"]
 	path = bundle/textobj-rubyblock
 	url = https://github.com/nelstrom/vim-textobj-rubyblock.git
+[submodule "bundle/gundo"]
+	path = bundle/gundo
+	url = git://github.com/vim-scripts/Gundo.git
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule "bundle/vimrepress"]
+	path = bundle/vimrepress
+	url = https://github.com/connermcd/VimRepress.git
+[submodule "bundle/markdown"]
+	path = bundle/markdown
+	url = https://github.com/plasticboy/vim-markdown.git
