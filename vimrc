@@ -3,11 +3,8 @@
 " Global Stuff
 "-----------------------------------------------------------------------------
 
-filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+call pathogen#infect()
 " Set filetype stuff to on
-"filetype on
 filetype plugin indent on
 
 let mapleader = ","
