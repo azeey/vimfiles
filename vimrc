@@ -728,7 +728,7 @@ set lcs=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
 " n - recon numbered lists
 " v - wrap on blanks
 " t - autowrap TEXT using textwidth
-set fo=croqnvt
+set fo=crqnvt
 
 function! SwitchSourceHeader()
   "update!
