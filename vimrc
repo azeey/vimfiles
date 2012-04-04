@@ -150,7 +150,7 @@ set mouse=a
 set ttymouse=xterm2
 
 "tell the term has 256 colors
-"set t_Co=256
+set t_Co=256
 
 "dont load csapprox if we no gui support - silences an annoying warning
 "if !has("gui")
@@ -280,7 +280,7 @@ set guicursor+=r-cr:hor20-Cursor
 set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
 " set the gui options the way I like
-"set guioptions=ac
+set guioptions=aic
 
 " This is the timeout used while waiting for user input on a multi-keyed macro
 " or while just sitting and waiting for another key to be pressed measured
@@ -638,7 +638,8 @@ iab unnec     unnecessary
 if has("gui_running")
     "colors desert  
     colors twilight2
-    set guifont=Monaco
+    "set guifont=Monaco
+    set guifont=Monaco\ 12.5
     "set guifont=Terminus\ 13.5
     runtime ftplugin/man.vim
     "nmap K :Man <cword><CR>
