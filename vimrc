@@ -67,7 +67,7 @@ set mouse=a
 set ttymouse=xterm2
 
 "tell the term has 256 colors
-"set t_Co=256
+set t_Co=256
 
 "dont load csapprox if we no gui support - silences an annoying warning
 "if !has("gui")
@@ -174,6 +174,17 @@ syntax on
 " Hide the mouse pointer while typing
 set mousehide
 
+" Set up the gui cursor to look nice
+set guicursor=n-v-c:block-Cursor-blinkon0
+set guicursor+=ve:ver35-Cursor
+set guicursor+=o:hor50-Cursor
+set guicursor+=i-ci:ver25-Cursor
+set guicursor+=r-cr:hor20-Cursor
+set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+
+" set the gui options the way I like
+set guioptions=aic
+>>>>>>> 404f5c05a0c2295c4967baa1a13477844a4db6ef
 
 " This is the timeout used while waiting for user input on a multi-keyed macro
 " or while just sitting and waiting for another key to be pressed measured
@@ -540,6 +551,7 @@ iab seperate  separate
 iab Seperate  Separate
 iab fone      phone
 iab Fone      Phone
+iab unnec     unnecessary
 
 "-----------------------------------------------------------------------------
 " Set up the window colors and size
@@ -600,6 +612,7 @@ nmap <silent> ,c :set cursorline! cursorcolumn! <CR>
 "set grepformat=%f:%l:%c:%m
 
 let g:showmarks_enable = 0
+nmap <F3> :ShowMarksToggle<CR>
 "hi SignColumn guibg=NONE
 nmap <F6> :TlistToggle<CR>
 
