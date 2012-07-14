@@ -1,11 +1,14 @@
-"Mostly borrowed from Derek Wyatt's vimrc http://www.derekwyatt.org/
-"-----------------------------------------------------------------------------
-" Global Stuff
-"-----------------------------------------------------------------------------
-
+".vimrc
+"Author: Addisu Taddese
+"Source: http://github.com/azeey/dotfiles/vimrc
+"
+"Preamble ------------------------------------------------------------{{{
+"
+"Initialize pathogen
 call pathogen#infect()
-" Set filetype stuff to on
 filetype plugin indent on
+
+"}}}
 
 let mapleader = ","
 
@@ -16,125 +19,41 @@ set nocompatible
 "allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-"store lots of :cmdline history
-set history=1000
 
-set showcmd     "show incomplete cmds down the bottom
-set showmode    "show current mode down the bottom
+set history=1000 " store lots of :cmdline history
+set showcmd      " show incomplete cmds down the bottom
+set showmode     " show current mode down the bottom
+set incsearch    " find the next match as we type the search
+set hlsearch     " hilight searches by default
+set nowrap       " dont wrap lines
+set linebreak    " wrap lines at convenient points
 
-set incsearch   "find the next match as we type the search
-set hlsearch    "hilight searches by default
+set encoding=utf-8
+set modelines=0
+set autoindent
+"set visualbell
+set ttyfast
+set ruler
+set nonumber
+set norelativenumber
+set undoreload=10000
+set shell=/bin/bash
+set matchtime=3
+set showbreak=↪
+set splitbelow
+set splitright
+"set fillchars=diff:⣿,vert:│
+set fillchars+=stl:\ ,stlnc:\
+"set autowrite
+"set autoread
+set shiftround
+set title
+set dictionary=/usr/share/dict/words
+set spellfile=~/.vim/custom-dictionary.utf-8.add
+set colorcolumn=+1
 
-set nowrap      "dont wrap lines
-set linebreak   "wrap lines at convenient points
-
-
-"recalculate the trailing whitespace warning when idle, and after saving
-"autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
-
-"return '[\s]' if trailing white space is detected
-"return '' otherwise
-function! StatuslineTrailingSpaceWarning()
-    if !exists("b:statusline_trailing_space_warning")
-        if search('\s\+$', 'nw') != 0
-            let b:statusline_trailing_space_warning = '[\s]'
-        else
-            let b:statusline_trailing_space_warning = ''
-        endif
-    endif
-    return b:statusline_trailing_space_warning
-endfunction
-
-
-"return the syntax highlight group under the cursor ''
-function! StatuslineCurrentHighlight()
-    let name = synIDattr(synID(line('.'),col('.'),1),'name')
-    if name == ''
-        return ''
-    else
-        return '[' . name . ']'
-    endif
-endfunction
-
-"recalculate the tab warning flag when idle and after writing
-"autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
-
-"return '[&et]' if &et is set wrong
-"return '[mixed-indenting]' if spaces and tabs are used to indent
-"return an empty string if everything is fine
-function! StatuslineTabWarning()
-    if !exists("b:statusline_tab_warning")
-        let tabs = search('^\t', 'nw') != 0
-        let spaces = search('^ ', 'nw') != 0
-
-        if tabs && spaces
-            let b:statusline_tab_warning =  '[mixed-indenting]'
-        elseif (spaces && !&et) || (tabs && &et)
-            let b:statusline_tab_warning = '[&et]'
-        else
-            let b:statusline_tab_warning = ''
-        endif
-    endif
-    return b:statusline_tab_warning
-endfunction
-
-"recalculate the long line warning when idle and after saving
-"autocmd cursorhold,bufwritepost * unlet! b:statusline_long_line_warning
-
-"return a warning for "long lines" where "long" is either &textwidth or 80 (if
-"no &textwidth is set)
-"
-"return '' if no long lines
-"return '[#x,my,$z] if long lines are found, were x is the number of long
-"lines, y is the median length of the long lines and z is the length of the
-"longest line
-function! StatuslineLongLineWarning()
-    if !exists("b:statusline_long_line_warning")
-        let long_line_lens = s:LongLines()
-
-        if len(long_line_lens) > 0
-            let b:statusline_long_line_warning = "[" .
-                        \ '#' . len(long_line_lens) . "," .
-                        \ 'm' . s:Median(long_line_lens) . "," .
-                        \ '$' . max(long_line_lens) . "]"
-        else
-            let b:statusline_long_line_warning = ""
-        endif
-    endif
-    return b:statusline_long_line_warning
-endfunction
-
-"return a list containing the lengths of the long lines in this buffer
-function! s:LongLines()
-    let threshold = (&tw ? &tw : 80)
-    let spaces = repeat(" ", &ts)
-
-    let long_line_lens = []
-
-    let i = 1
-    while i <= line("$")
-        let len = strlen(substitute(getline(i), '\t', spaces, 'g'))
-        if len > threshold
-            call add(long_line_lens, len)
-        endif
-        let i += 1
-    endwhile
-
-    return long_line_lens
-endfunction
-
-"find the median of the given array of numbers
-function! s:Median(nums)
-    let nums = sort(a:nums)
-    let l = len(nums)
-
-    if l % 2 == 1
-        let i = (l-1) / 2
-        return nums[i]
-    else
-        return (nums[l/2] + nums[(l/2)-1]) / 2
-    endif
-endfunction
+" Don't try to highlight lines longer than 800 characters.
+set synmaxcol=800
 
 set wildmode=list:longest   "make cmdline tab completion similar to bash
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
@@ -213,9 +132,6 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-" Show line numbers
-set nu
-
 " set the search scan to wrap lines
 set wrapscan
 
@@ -233,9 +149,6 @@ set ch=2
 " set visual bell -- i hate that damned beeping
 "set vb
 
-" Allow backspacing over indent, eol, and the start of an insert
-set backspace=2
-
 " Make sure that unsaved buffers that are to be put in the background are
 " allowed to go in there (ie. the "must save first" error doesn't come up)
 set hidden
@@ -243,12 +156,6 @@ set hidden
 " Make the 'cw' and like commands put a $ at the end instead of just deleting
 " the text and replacing it
 "set cpoptions=ces$
-
-" Set the status line the way i like it
-set statusline=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
@@ -259,8 +166,6 @@ set lazyredraw
 " Show the current command in the lower right corner
 set showcmd
 
-" Show the current mode
-set showmode
 
 " Switch on syntax highlighting.
 syntax on
@@ -268,16 +173,6 @@ syntax on
 " Hide the mouse pointer while typing
 set mousehide
 
-" Set up the gui cursor to look nice
-set guicursor=n-v-c:block-Cursor-blinkon0
-set guicursor+=ve:ver35-Cursor
-set guicursor+=o:hor50-Cursor
-set guicursor+=i-ci:ver25-Cursor
-set guicursor+=r-cr:hor20-Cursor
-set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
-
-" set the gui options the way I like
-"set guioptions=ac
 
 " This is the timeout used while waiting for user input on a multi-keyed macro
 " or while just sitting and waiting for another key to be pressed measured
@@ -319,9 +214,6 @@ set showfulltag
 
 " Set the textwidth to be 120 chars
 set textwidth=120
-
-" get rid of the silly characters in window separators
-set fillchars=""
 
 " Turn tabs into spaces
 set expandtab
@@ -534,11 +426,11 @@ nmap ,t :FufBufferTag<CR>
 nmap ,ff :FufFile<CR>
 nmap ,ft :FufTag<CR>
 nmap ,fj :FufJumpList<CR>
-nmap <C-B> :FufBuffer<CR>
+"nmap <C-B> :FufBuffer<CR>
 nmap ,= =i{
 "map to fuzzy finder text mate stylez
 "nnoremap <C-f> :FuzzyFinderTaggedFile<CR>
-nnoremap <C-f> :FufTaggedFile<CR>
+"nnoremap <C-f> :FufTaggedFile<CR>
 
 "-----------------------------------------------------------------------------
 " Functions
@@ -584,6 +476,7 @@ augroup derek_xsd
     au BufEnter *.xsd,*.wsdl,*.xml setl formatoptions=crq | setl textwidth=80
 augroup END
 
+"" Binary {{{
 augroup Binary
     au!
     au BufReadPre   *.bin let &bin=1
@@ -593,6 +486,25 @@ augroup Binary
     au BufWritePre  *.bin endif
     au BufWritePost *.bin if &bin | %!xxd
     au BufWritePost *.bin set nomod | endif
+augroup END
+
+"" }}}
+"" Vim {{{
+
+augroup ft_vim
+    au!
+
+    au FileType vim setlocal foldmethod=marker
+    au FileType help setlocal textwidth=78
+    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+augroup END
+
+" }}}
+
+augroup trailing
+   au!
+   au InsertEnter * :set listchars-=trail:⌴
+   au InsertLeave * :set listchars+=trail:⌴
 augroup END
 
 "-----------------------------------------------------------------------------
@@ -632,9 +544,27 @@ iab Fone      Phone
 " Set up the window colors and size
 "-----------------------------------------------------------------------------
 if has("gui_running")
-    "colors desert  
-    colors twilight2
-    set guifont=Monaco
+    " Set up the gui cursor to look nice
+    set guicursor=n-v-c:block-Cursor-blinkon0
+    set guicursor+=ve:ver35-Cursor
+    set guicursor+=o:hor50-Cursor
+    set guicursor+=i-ci:ver25-Cursor
+    set guicursor+=r-cr:hor20-Cursor
+    set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+
+    "set guicursor=n-c:block-Cursor-blinkon0
+    "set guicursor+=v:block-vCursor-blinkon0
+    "set guicursor+=i-ci:ver20-iCursor
+
+    set go-=T
+    set go-=l
+    set go-=L
+    set go-=r
+    set go-=R
+
+    "set guifont=Monaco
+    set guifont=Monaco\ for\ Powerline\ 12
+    "set guifont=Menlo\ for\ Powerline\ 12
     "set guifont=Terminus\ 13.5
     runtime ftplugin/man.vim
     "nmap K :Man <cword><CR>
@@ -648,14 +578,12 @@ if has("gui_running")
         endif
         let g:vimrcloaded = 1
     endif
- else
-    colors desert
 endif
+colors badwolf
 
 " Addisu's settings
 
 set linespace=0 " Pixels of space between lines
-set autoindent
 set cindent
 "let loaded_matchit = 1
 
@@ -664,7 +592,7 @@ nmap <silent> ,nhx :%!xxd -r <CR>
 nmap <silent> ,sb :set scb<CR>
 nmap <silent> ,x "_x
 "Highlight or underline
-nmap <silent> ,c :set cursorline! <CR>
+nmap <silent> ,c :set cursorline! cursorcolumn! <CR>
 
 
 "set grepprg=ack 
@@ -711,11 +639,11 @@ set list
 " that case try to view this in utf-8 encoding or just make your own lcs
 " string as described above.
 
-
 "set lcs=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:&
 "set lcs=tab:└─,trail:·,extends:>,precedes:<,nbsp:&
 "set lcs=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
-set lcs=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
+"set lcs=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 " formatoptions:
 " c - autowrap COMMENTS using textwidth
 " r - insert comment leader (?) on <enter>
@@ -764,18 +692,26 @@ let ropevim_vim_completion=1
 let ropevim_extended_complete=1
 "let g:syntastic_auto_loc_list=1
 
-if version >= 703
-    "Gundo mapping
-    nnoremap <F4> :GundoToggle<CR>
+"Gundo mapping
+nnoremap <F4> :GundoToggle<CR>
 
-    set undofile
-    set undodir=/tmp/
-end
+set undofile
+set undodir=~/.vim/tmp/undo//     " undo files
+set backupdir=~/.vim/tmp/backup// " backups
+set directory=~/.vim/tmp/swap//   " swap files
+set backup                        " enable backups
+set noswapfile                    " It's 2012, Vim
 
 "Convert unix epoch time to datetime.  Removes the last 3 digits assuming that they are milliseconds
 nnoremap <Leader>e :echo system("date +%c -u -d @" . <C-r><C-w><del><del><del>)<CR>
 nnoremap <Leader>ec :echo system("date +%c -d @" . <C-r><C-w>)<CR>
 
 
-" Blog
-let VIMPRESS = [{'username':'azeey', 'blog_url': 'http://addisu.taddese.com/blog/'}]
+" Powerline {{{
+
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_cache_enabled = 1
+" let g:Powerline_colorscheme = 'badwolf'
+
+" }}}
+"
