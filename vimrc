@@ -183,8 +183,7 @@ set guicursor+=r-cr:hor20-Cursor
 set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
 " set the gui options the way I like
-set guioptions=aic
->>>>>>> 404f5c05a0c2295c4967baa1a13477844a4db6ef
+"set guioptions=aic
 
 " This is the timeout used while waiting for user input on a multi-keyed macro
 " or while just sitting and waiting for another key to be pressed measured
