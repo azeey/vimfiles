@@ -6,6 +6,7 @@
 "
 "Initialize pathogen
 call pathogen#infect()
+call pathogen#helptags()
 filetype plugin indent on
 
 "}}}
@@ -42,8 +43,7 @@ set matchtime=3
 set showbreak=↪
 set splitbelow
 set splitright
-"set fillchars=diff:⣿,vert:│
-set fillchars+=stl:\ ,stlnc:\
+set fillchars=diff:⣿,vert:│
 "set autowrite
 "set autoread
 set shiftround
@@ -575,8 +575,8 @@ if has("gui_running")
     set go-=R
 
     "set guifont=Monaco
-    set guifont=Monaco\ for\ Powerline\ 12
-    "set guifont=Menlo\ for\ Powerline\ 12
+    "set guifont=Monaco\ for\ Powerline\ 12.5
+    set guifont=Menlo\ for\ Powerline\ 11
     "set guifont=Terminus\ 13.5
     runtime ftplugin/man.vim
     "nmap K :Man <cword><CR>
@@ -592,6 +592,7 @@ if has("gui_running")
     endif
 endif
 colors badwolf
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Addisu's settings
 
@@ -606,6 +607,8 @@ nmap <silent> ,x "_x
 "Highlight or underline
 nmap <silent> ,c :set cursorline! cursorcolumn! <CR>
 
+" Clean trailing whitespace
+nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
 
 "set grepprg=ack 
 "set grepformat=%f:%l:%c:%m
@@ -719,6 +722,21 @@ set noswapfile                    " It's 2012, Vim
 nnoremap <Leader>e :echo system("date +%c -u -d @" . <C-r><C-w><del><del><del>)<CR>
 nnoremap <Leader>ec :echo system("date +%c -d @" . <C-r><C-w>)<CR>
 
+" Don't move on *
+nnoremap * *<c-o>
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+" Same when jumping around
+nnoremap g; g;zz
+nnoremap g, g,zz
+nnoremap <c-o> <c-o>zz
+
+" Open a Quickfix window for the last search.
+nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+
+" Ack for the last search.
+nnoremap <silent> <leader>/ :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
 
 " Powerline {{{
 
@@ -727,4 +745,80 @@ let g:Powerline_cache_enabled = 1
 " let g:Powerline_colorscheme = 'badwolf'
 
 " }}}
-"
+" Folding ----------------------------------------------------------------- {{{
+
+set foldlevelstart=0
+
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+
+" "Refocus" folds
+nnoremap ,z zMzvzz
+
+" Make zO recursively open whatever top level fold we're in, no matter where the
+" cursor happens to be.
+nnoremap zO zCzO
+
+function! MyFoldText() " {{{
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction " }}}
+set foldtext=MyFoldText()
+
+" }}}
+" CtrlP {{{
+nnoremap <c-b> :<C-U>CtrlPBuffer<CR>
+"}}}
+" Filetype-specific ------------------------------------------------------- {{{
+" C {{{
+
+augroup ft_c
+    au!
+    au FileType c setlocal foldmethod=syntax
+augroup END
+
+" }}}
+" QuickFix {{{
+
+augroup ft_quickfix
+    au!
+    au Filetype qf setlocal colorcolumn=0 nolist nocursorline nowrap tw=0
+augroup END
+
+" }}}
+" Ruby {{{
+
+augroup ft_ruby
+    au!
+    au Filetype ruby setlocal foldmethod=syntax
+augroup END
+
+" }}}
+" Vim {{{
+
+augroup ft_vim
+    au!
+
+    au FileType vim setlocal foldmethod=marker
+    au FileType help setlocal textwidth=78
+    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+augroup END
+" }}}
+" Ack {{{
+
+nnoremap <leader>a :Ack!<space>
+
+" }}}
+" }}}
