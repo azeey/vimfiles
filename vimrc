@@ -90,6 +90,9 @@ nnoremap Y y$
 
 "mark syntax errors with :signs
 let g:syntastic_enable_signs=1
+let g:syntastic_python_checker_args="--good-names=x,y,z,i,j,k"
+let g:syntastic_disabled_filetypes = ['c', 'cpp']
+"let g:syntastic_auto_loc_list=1
 
 
 "visual search mappings
@@ -306,7 +309,7 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 "nmap <silent> ^ :setl hls<CR>:let @/="<C-r><C-w>"<CR>
 
 " Eclim mapping
-"nnoremap <silent> <buffer> <cr> :CSearchContext<cr> 
+"nnoremap <silent> <buffer> <cr> :CSearchContext<cr>
 
 " Search the current file for what's currently in the search
 " register and display matches
@@ -374,7 +377,7 @@ let g:SrcExpl_isUpdateTags = 0
 "let g:SrcExpl_updateTagsCmd = "retag.ksh"
 
 " Set "<F9>" key for updating the tags file artificially
-let g:SrcExpl_updateTagsKey = "<F9>" 
+let g:SrcExpl_updateTagsKey = "<F9>"
 
 "-----------------------------------------------------------------------------
 " NERD Tree Plugin Settings
@@ -610,7 +613,7 @@ nmap <silent> ,c :set cursorline! cursorcolumn! <CR>
 " Clean trailing whitespace
 nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
 
-"set grepprg=ack 
+"set grepprg=ack
 "set grepformat=%f:%l:%c:%m
 
 let g:showmarks_enable = 0
@@ -619,8 +622,7 @@ nmap <F3> :ShowMarksToggle<CR>
 nmap <F6> :TlistToggle<CR>
 
 " Set the update time to 500ms so showmarks is more responsive
-set updatetime=500 
-"autocmd FileType python setlocal omnifunc=pysmell#Complete
+set updatetime=500
 
 "autocmd BufNewFile,BufRead *.mxml,*.as :nmap <C-B> :!bash ~/bin/fcshcmp.sh %:p
 "autocmd BufNewFile,BufRead *.mxml,*.as :nmap <C-B> :!~/bin/fcshcmp.sh %:p run
@@ -633,9 +635,6 @@ let g:manpageview_options_py= ";-f;-q"
 let g:manpageview_pgm_rb = "ri"
 let g:manpageview_options_rb= ";-f;-q"
 
-autocmd FileType python setlocal omnifunc=pysmell#Complete
-autocmd FileType python set sw=4 sts=4 ts=4
-"autocmd FileType python set sw=2 sts=2 ts=2
 autocmd FileType ruby set sw=2 sts=2 ts=2
 autocmd FileType cpp set sw=4 sts=4 ts=4
 autocmd FileType c set sw=4 sts=4 ts=4
@@ -696,7 +695,6 @@ nmap ci; ciw;
 nmap ciw; diwct;
 nmap caw; dawct;
 
-let g:syntastic_disabled_filetypes = ['c', 'cpp']
 set csto=1
 set nocst
 
@@ -706,7 +704,6 @@ let g:SvnVimDiffStyle=""
 
 let ropevim_vim_completion=1
 let ropevim_extended_complete=1
-"let g:syntastic_auto_loc_list=1
 
 "Gundo mapping
 nnoremap <F4> :GundoToggle<CR>
@@ -737,11 +734,13 @@ nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 " Ack for the last search.
 nnoremap <silent> <leader>/ :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+" Resize splits when the window is resized
+au VimResized * :wincmd =
 
 " Powerline {{{
-
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_cache_enabled = 1
+call Pl#Theme#InsertSegment('charcode', 'after', 'filetype')
 " let g:Powerline_colorscheme = 'badwolf'
 
 " }}}
@@ -781,6 +780,27 @@ set foldtext=MyFoldText()
 " CtrlP {{{
 nnoremap <c-b> :<C-U>CtrlPBuffer<CR>
 "}}}
+" Scratch {{{
+
+command! ScratchToggle call ScratchToggle()
+
+function! ScratchToggle()
+    if exists("w:is_scratch_window")
+        unlet w:is_scratch_window
+        exec "q"
+    else
+        exec "normal! :Sscratch\<cr>\<C-W>J:resize 13\<cr>"
+        let w:is_scratch_window = 1
+    endif
+endfunction
+
+nnoremap <silent> <leader><tab> :ScratchToggle<cr>
+
+" }}}
+
+" Pymode {{{
+let g:pymode_lint=0
+" }}}
 " Filetype-specific ------------------------------------------------------- {{{
 " C {{{
 
@@ -821,4 +841,16 @@ augroup END
 nnoremap <leader>a :Ack!<space>
 
 " }}}
+" Python {{{
+augroup ft_python
+    au!
+
+    au FileType python setlocal omnifunc=pysmell#Complete
+    au FileType python setlocal sw=4 sts=4 ts=4
+    au FileType python set textwidth=79
+    au Filetype python setlocal foldmethod=expr
+augroup END
 " }}}
+" }}}
+"
+"
