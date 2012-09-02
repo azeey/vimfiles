@@ -433,20 +433,6 @@ command! -complete=customlist,ListKnownSnippetLanguageTypes
          \ -nargs=? RS call ReloadSnippets("<args>")
 
 "-----------------------------------------------------------------------------
-" FuzzyFinder Settings
-"-----------------------------------------------------------------------------
-nmap ,fb :FufBuffer<CR>
-nmap ,t :FufBufferTag<CR>
-nmap ,ff :FufFile<CR>
-nmap ,ft :FufTag<CR>
-nmap ,fj :FufJumpList<CR>
-"nmap <C-B> :FufBuffer<CR>
-nmap ,= =i{
-"map to fuzzy finder text mate stylez
-"nnoremap <C-f> :FuzzyFinderTaggedFile<CR>
-"nnoremap <C-f> :FufTaggedFile<CR>
-
-"-----------------------------------------------------------------------------
 " Functions
 "-----------------------------------------------------------------------------
 
@@ -577,9 +563,9 @@ if has("gui_running")
     set go-=r
     set go-=R
 
-    "set guifont=Monaco
+    set guifont=Monaco\ 11
     "set guifont=Monaco\ for\ Powerline\ 12.5
-    set guifont=Menlo\ for\ Powerline\ 11
+    "set guifont=Menlo\ for\ Powerline\ 11
     "set guifont=Terminus\ 13.5
     runtime ftplugin/man.vim
     "nmap K :Man <cword><CR>
@@ -695,6 +681,13 @@ nmap ci; ciw;
 nmap ciw; diwct;
 nmap caw; dawct;
 
+let g:syntastic_quiet_warnings=1
+let g:syntastic_cpp_no_include_search=1
+"let g:syntastic_auto_loc_list=1
+let g:syntastic_cpp_remove_include_errors=1
+"
+let g:syntastic_mode_map = { 'mode': 'passive'}
+
 set csto=1
 set nocst
 
@@ -737,6 +730,19 @@ nnoremap <silent> <leader>/ :execute "Ack! '" . substitute(substitute(substitute
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
+" Line Return {{{
+
+" Make sure Vim returns to the same line when you reopen a file.
+" Thanks, Amit
+augroup line_return
+    au!
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
+
+" }}}
 " Powerline {{{
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_cache_enabled = 1
@@ -798,8 +804,29 @@ nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 
 " }}}
 
-" Pymode {{{
-let g:pymode_lint=0
+" Python-Mode {{{
+let g:pymode_doc = 1
+let g:pymode_doc_key = '<leader>ds'
+let g:pydoc = 'pydoc'
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 0
+let g:pymode_syntax_builtin_objs = 1
+let g:pymode_syntax_print_as_function = 0
+let g:pymode_syntax_space_errors = 0
+let g:pymode_run = 0
+let g:pymode_lint = 0
+let g:pymode_breakpoint = 0
+let g:pymode_utils_whitespaces = 0
+let g:pymode_virtualenv = 0
+let g:pymode_folding = 1
+
+let g:pymode_options_indent = 0
+let g:pymode_options_other = 0
+
+let g:pymode_rope = 0
+" }}}
+" Yankring {{{
+nnoremap <silent> <F11> :YRShow<CR>
 " }}}
 " Filetype-specific ------------------------------------------------------- {{{
 " C {{{
