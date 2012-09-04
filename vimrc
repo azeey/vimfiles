@@ -476,31 +476,6 @@ augroup derek_xsd
     au BufEnter *.xsd,*.wsdl,*.xml setl formatoptions=crq | setl textwidth=80
 augroup END
 
-"" Binary {{{
-augroup Binary
-    au!
-    au BufReadPre   *.bin let &bin=1
-    au BufReadPost  *.bin if &bin | %!xxd
-    au BufReadPost  *.bin set filetype=xxd | endif
-    au BufWritePre  *.bin if &bin | %!xxd -r
-    au BufWritePre  *.bin endif
-    au BufWritePost *.bin if &bin | %!xxd
-    au BufWritePost *.bin set nomod | endif
-augroup END
-
-"" }}}
-"" Vim {{{
-
-augroup ft_vim
-    au!
-
-    au FileType vim setlocal foldmethod=marker
-    au FileType help setlocal textwidth=78
-    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
-augroup END
-
-" }}}
-
 augroup trailing
    au!
    au InsertEnter * :set listchars-=trail:⌴
@@ -686,7 +661,7 @@ let g:syntastic_cpp_no_include_search=1
 "let g:syntastic_auto_loc_list=1
 let g:syntastic_cpp_remove_include_errors=1
 "
-let g:syntastic_mode_map = { 'mode': 'passive'}
+"let g:syntastic_mode_map = { 'mode': 'passive'}
 
 set csto=1
 set nocst
@@ -755,8 +730,8 @@ call Pl#Theme#InsertSegment('charcode', 'after', 'filetype')
 set foldlevelstart=0
 
 " Space to toggle folds.
-nnoremap <Space> za
-vnoremap <Space> za
+"nnoremap <Space> za
+"vnoremap <Space> za
 
 " "Refocus" folds
 nnoremap ,z zMzvzz
@@ -803,7 +778,6 @@ endfunction
 nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 
 " }}}
-
 " Python-Mode {{{
 let g:pymode_doc = 1
 let g:pymode_doc_key = '<leader>ds'
@@ -828,7 +802,33 @@ let g:pymode_rope = 0
 " Yankring {{{
 nnoremap <silent> <F11> :YRShow<CR>
 " }}}
+" Vimux {{{
+
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
+
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <Leader>vs "vy: call VimuxRunCommand(@v . "\n", 0)<CR>
+
+" Select current paragraph and send it to tmux
+nmap <Leader>vs vip<Leader>vs<CR>
+
+" }}}
+
 " Filetype-specific ------------------------------------------------------- {{{
+" Binary {{{
+augroup Binary
+    au!
+    au BufReadPre   *.bin let &bin=1
+    au BufReadPost  *.bin if &bin | %!xxd
+    au BufReadPost  *.bin set filetype=xxd | endif
+    au BufWritePre  *.bin if &bin | %!xxd -r
+    au BufWritePre  *.bin endif
+    au BufWritePost *.bin if &bin | %!xxd
+    au BufWritePost *.bin set nomod | endif
+augroup END
+
+"" }}}
 " C {{{
 
 augroup ft_c
@@ -860,7 +860,7 @@ augroup ft_vim
 
     au FileType vim setlocal foldmethod=marker
     au FileType help setlocal textwidth=78
-    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+    "au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
 " }}}
 " Ack {{{
@@ -876,6 +876,15 @@ augroup ft_python
     au FileType python setlocal sw=4 sts=4 ts=4
     au FileType python set textwidth=79
     au Filetype python setlocal foldmethod=expr
+augroup END
+" }}}
+" Lisp {{{
+augroup ft_lisp
+    au!
+
+    au FileType lisp setlocal sw=2 sts=2 ts=2
+    au FileType lisp set textwidth=80
+    au Filetype lisp setlocal foldmethod=indent
 augroup END
 " }}}
 " }}}
