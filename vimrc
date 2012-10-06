@@ -12,6 +12,7 @@ filetype plugin indent on
 "}}}
 
 let mapleader = ","
+let maplocalleader = "\\"
 
 "Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
@@ -289,6 +290,7 @@ noremap <silent> <C-F10> :resize +10<CR>
 noremap <silent> <C-F11> :resize -10<CR>
 noremap <silent> <C-F12> :vertical resize +10<CR>
 noremap <silent> ,s8 :vertical resize 83<CR>
+noremap <silent> ,s1 :vertical resize 123<CR>
 
 " Buffer commands
 noremap <silent> ,bd :bd<CR>
@@ -335,6 +337,7 @@ nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=2048
+
 
 " I don't like it when the matching parens are automatically highlighted
 "let loaded_matchparen = 1
@@ -730,8 +733,8 @@ call Pl#Theme#InsertSegment('charcode', 'after', 'filetype')
 set foldlevelstart=0
 
 " Space to toggle folds.
-"nnoremap <Space> za
-"vnoremap <Space> za
+nnoremap <Space> za
+vnoremap <Space> za
 
 " "Refocus" folds
 nnoremap ,z zMzvzz
@@ -759,7 +762,8 @@ set foldtext=MyFoldText()
 
 " }}}
 " CtrlP {{{
-nnoremap <c-b> :<C-U>CtrlPBuffer<CR>
+"nnoremap <c-b> :<C-U>CtrlPBuffer<CR>
+let g:ctrlp_map = '<c-b>'
 "}}}
 " Scratch {{{
 
@@ -885,6 +889,24 @@ augroup ft_lisp
     au FileType lisp setlocal sw=2 sts=2 ts=2
     au FileType lisp set textwidth=80
     au Filetype lisp setlocal foldmethod=indent
+augroup END
+" }}}
+" Markdown {{{
+augroup ft_mkd
+    au!
+    " Bolden a word
+    au Filetype mkd let g:surround_45 = "**\r**"
+    au Filetype mkd nmap <leader>b ysw-
+augroup END
+" }}}
+" Pandoc {{{
+augroup ft_pandoc
+    au!
+    " Bolden a word
+    au Filetype pandoc let g:surround_45 = "**\r**"
+    au Filetype pandoc nmap <leader>b ysw-
+    au Filetype pandoc vmap <leader>b S-
+    au Filetype pandoc set tw=80
 augroup END
 " }}}
 " }}}
