@@ -909,6 +909,17 @@ augroup ft_pandoc
     au Filetype pandoc set tw=80
 augroup END
 " }}}
+" Latex {{{
+augroup ft_latex
+    au!
+    au Filetype latex set ts=2 sts=2 sw=2
+    au Filetype latex set makeprg scons
+    au Filetype latex map <F2> make<CR>
+    au Filetype tex set ts=2 sts=2 sw=2
+    au Filetype tex set makeprg=scons
+    au Filetype tex map <F2> :make<CR>
+augroup END
+" }}}
 " }}}
 "
 "
