@@ -762,8 +762,8 @@ set foldtext=MyFoldText()
 
 " }}}
 " CtrlP {{{
-"nnoremap <c-b> :<C-U>CtrlPBuffer<CR>
-let g:ctrlp_map = '<c-b>'
+nnoremap <c-b> :<C-U>CtrlPBuffer<CR>
+let g:ctrlp_map = '<c-f>'
 "}}}
 " Scratch {{{
 
@@ -806,17 +806,9 @@ let g:pymode_rope = 0
 " Yankring {{{
 nnoremap <silent> <F11> :YRShow<CR>
 " }}}
-" Vimux {{{
-
-" Prompt for a command to run
-map <Leader>vp :VimuxPromptCommand<CR>
-
-" If text is selected, save it in the v buffer and send that buffer it to tmux
-vmap <Leader>vs "vy: call VimuxRunCommand(@v . "\n", 0)<CR>
-
-" Select current paragraph and send it to tmux
-nmap <Leader>vs vip<Leader>vs<CR>
-
+" Slimv {{{
+  let g:slimv_leader = ';'
+  let g:paredit_leader = ';'
 " }}}
 
 " Filetype-specific ------------------------------------------------------- {{{
@@ -880,6 +872,8 @@ augroup ft_python
     au FileType python setlocal sw=4 sts=4 ts=4
     au FileType python set textwidth=79
     au Filetype python setlocal foldmethod=expr
+    " Use the same mapping as slimv for vim-ipython
+    au Filetype python map ;s <C-s>
 augroup END
 " }}}
 " Lisp {{{
