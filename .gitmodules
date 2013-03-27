@@ -115,3 +115,9 @@
 [submodule "bundle/ipython"]
 	path = bundle/ipython
 	url = https://github.com/ivanov/vim-ipython.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips
+[submodule "bundle/solarized"]
+	path = bundle/solarized
+	url = git://github.com/altercation/vim-colors-solarized.git

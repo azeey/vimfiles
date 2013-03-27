@@ -810,6 +810,11 @@ nnoremap <silent> <F11> :YRShow<CR>
   let g:slimv_leader = ';'
   let g:paredit_leader = ';'
 " }}}
+"
+" Pandoc {{{
+let g:pandoc_use_hard_wraps = 1
+let g:pandoc_auto_format = 1
+" }}}
 
 " Filetype-specific ------------------------------------------------------- {{{
 " Binary {{{
@@ -901,6 +906,7 @@ augroup ft_pandoc
     au Filetype pandoc nmap <leader>b ysw-
     au Filetype pandoc vmap <leader>b S-
     au Filetype pandoc set tw=80
+    au Filetype pandoc nnoremap <F2>:PandocPdf<CR>:bd<CR>
 augroup END
 " }}}
 " Latex {{{
@@ -913,6 +919,14 @@ augroup ft_latex
     au Filetype tex set makeprg=scons
     au Filetype tex map <F2> :make<CR>
 augroup END
+" }}}
+"
+" Launch (ROS) {{{
+augroup ft_launch
+    au!
+    au BufNewFile,BufRead *.launch set ft=xml ts=2 sts=2 sw=2
+augroup END
+" }}}
 " }}}
 " }}}
 "
