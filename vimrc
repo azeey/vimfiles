@@ -249,6 +249,9 @@ set path=.
 " Set the tags files to be the following
 set tags=./tags,tags
 
+" Set shell to zsh
+set shell=/bin/zsh
+
 " Let the syntax highlighting for Java files allow cpp keywords
 let java_allow_cpp_keywords = 1
 
@@ -763,7 +766,10 @@ set foldtext=MyFoldText()
 " }}}
 " CtrlP {{{
 nnoremap <c-b> :<C-U>CtrlPBuffer<CR>
+nnoremap <Leader>m :<C-U>CtrlPMRU<CR>
 let g:ctrlp_map = '<c-f>'
+let g:ctrlp_cmd = '<C-U>CtrlPMRU<CR>'
+let g:ctrlp_mruf_relative = 1
 "}}}
 " Scratch {{{
 
@@ -918,6 +924,8 @@ augroup ft_latex
     au Filetype tex set ts=2 sts=2 sw=2
     au Filetype tex set makeprg=scons
     au Filetype tex map <F2> :make<CR>
+    au Filetype tex let g:Tex_ViewRule_pdf='zathura'
+
 augroup END
 " }}}
 "
