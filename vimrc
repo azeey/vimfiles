@@ -911,8 +911,9 @@ augroup ft_pandoc
     au Filetype pandoc let g:surround_45 = "**\r**"
     au Filetype pandoc nmap <leader>b ysw-
     au Filetype pandoc vmap <leader>b S-
-    au Filetype pandoc set tw=80
+    au Filetype pandoc set tw=120
     au Filetype pandoc nnoremap <F2>:PandocPdf<CR>:bd<CR>
+    "au Filetype pandoc PandocRegisterExecutor PdcPdf <leader>d pdf 'pandoc -V geometry:margin=1in -o %:r.pdf %%'
 augroup END
 " }}}
 " Latex {{{
