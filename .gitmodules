@@ -48,7 +48,7 @@
 	url = http://github.com/msanders/snipmate.vim.git
 [submodule "bundle/showmarks"]
 	path = bundle/showmarks
-	url = http://github.com/vim-scripts/ShowMarks.git
+    url = https://github.com/harleypig/ShowMarks.git
 [submodule "bundle/svn"]
 	path = bundle/svn
 	url = https://github.com/scyn-conf/svn-vim.git
