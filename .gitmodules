@@ -21,7 +21,7 @@
 	url = http://github.com/ervandew/supertab.git
 [submodule "bundle/manpageview"]
 	path = bundle/manpageview
-	url = http://github.com/vim-scripts/ManPageView.git
+	url = https://github.com/StanAngeloff/ManPageView.git
 [submodule "bundle/srcexpl"]
 	path = bundle/srcexpl
 	url = http://github.com/vim-scripts/Source-Explorer-srcexpl.vim.git
