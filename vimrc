@@ -80,7 +80,7 @@ nnoremap <C-L> :nohls<CR><C-L>
 inoremap <C-L> <C-O>:nohls<CR>
 
 "map to bufexplorer
-"nnoremap <C-B> :BufExplorer<cr>
+nnoremap <leader>b :BufExplorer<cr>
 
 
 "map Q to something useful
@@ -462,6 +462,16 @@ function! FormatCalibration()
    normal gg=G
 endfunction
 
+function! WriteMode()
+    set background=light
+    let g:solarized_visibility="low"    "default value is normal
+    let g:solarized_contrast="normal"
+    colorscheme solarized
+    hi NonText guifg=bg 
+    set guioptions=aic cc=0 statusline=""
+endfunction
+
+nmap <Leader>wm :call WriteMode()<CR>
 "-----------------------------------------------------------------------------
 " Auto commands
 "-----------------------------------------------------------------------------
@@ -544,7 +554,8 @@ if has("gui_running")
     set go-=r
     set go-=R
 
-    set guifont=Monaco\ 11
+    set guifont=Monaco\ 12
+    "set guifont=Monaco\ 9.5
     "set guifont=Monaco\ for\ Powerline\ 12.5
     "set guifont=Menlo\ for\ Powerline\ 11
     "set guifont=Terminus\ 13.5
@@ -562,6 +573,7 @@ if has("gui_running")
     endif
 endif
 colors badwolf
+"colors solarized
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Addisu's settings
@@ -695,6 +707,7 @@ nnoremap <Leader>ec :echo system("date +%c -d @" . <C-r><C-w>)<CR>
 
 " Don't move on *
 nnoremap * *<c-o>
+nnoremap g* g*<c-o>
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
 nnoremap N Nzzzv
@@ -770,6 +783,7 @@ nnoremap <Leader>m :<C-U>CtrlPMRU<CR>
 let g:ctrlp_map = '<c-f>'
 let g:ctrlp_cmd = '<C-U>CtrlPMRU<CR>'
 let g:ctrlp_mruf_relative = 1
+let g:ctrlp_working_path_mode = 'a'
 "}}}
 " Scratch {{{
 
@@ -820,6 +834,9 @@ nnoremap <silent> <F11> :YRShow<CR>
 " Pandoc {{{
 let g:pandoc_use_hard_wraps = 1
 let g:pandoc_auto_format = 1
+" }}}
+" Tlist {{{
+let tlist_nesc_settings='nesC;b:configuration;c:command;d:definition;e:event;f:function;i:interface;m:module;r:result;t:task'
 " }}}
 
 " Filetype-specific ------------------------------------------------------- {{{
@@ -912,8 +929,9 @@ augroup ft_pandoc
     au Filetype pandoc nmap <leader>b ysw-
     au Filetype pandoc vmap <leader>b S-
     au Filetype pandoc set tw=120
-    au Filetype pandoc nnoremap <F2>:PandocPdf<CR>:bd<CR>
+    au Filetype pandoc nmap <F2>:PandocPdf<CR>:bd<CR>
     "au Filetype pandoc PandocRegisterExecutor PdcPdf <leader>d pdf 'pandoc -V geometry:margin=1in -o %:r.pdf %%'
+    au Filetype pandoc nmap <leader>h :!pandoc -t html5 -Ss -c ~/css/default.css -c %:p:h/style.css -o %:r.html %<CR>
 augroup END
 " }}}
 " Latex {{{
@@ -937,6 +955,11 @@ augroup ft_launch
 augroup END
 " }}}
 " }}}
+" TinyOS (nesc) {{{
+augroup ft_nesc
+    au!
+    au BufNewFile,BufRead *.nc set ft=nesc ts=2 sts=2 sw=2
+augroup END
 " }}}
-"
+" }}}
 "
