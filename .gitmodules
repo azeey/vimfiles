@@ -64,9 +64,6 @@
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
-[submodule "bundle/vimrepress"]
-	path = bundle/vimrepress
-	url = https://github.com/connermcd/VimRepress.git
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = https://github.com/plasticboy/vim-markdown.git
@@ -121,3 +118,9 @@
 [submodule "bundle/textobj-word-column"]
 	path = bundle/textobj-word-column
 	url = https://github.com/coderifous/textobj-word-column.vim.git
+[submodule "bundle/xml"]
+	path = bundle/xml
+	url = https://github.com/othree/xml.vim.git
+[submodule "bundle/vim-markdown"]
+	path = bundle/vim-markdown
+	url = https://github.com/tpope/vim-markdown.git
