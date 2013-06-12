@@ -467,8 +467,25 @@ function! WriteMode()
     let g:solarized_visibility="low"    "default value is normal
     let g:solarized_contrast="normal"
     colorscheme solarized
-    hi NonText guifg=bg 
+    hi NonText guifg=bg
     set guioptions=aic cc=0 statusline=""
+    " Increase font size
+    set guifont=Monaco\ 13
+    "Change the colorscheme for Powerline
+    let g:Powerline_colorscheme='solarized256_light'
+    "Disable statusline
+    setlocal statusline=
+    set laststatus=0
+    "No ruler
+    setlocal noruler
+    setlocal linebreak
+    "Disable textwidth column
+    setlocal colorcolumn=0 tw=120
+    "Disable list chars
+    setlocal nolist
+    setlocal nocursorline
+    setlocal nowrap
+
 endfunction
 
 nmap <Leader>wm :call WriteMode()<CR>

@@ -3,3 +3,4 @@ tags
 *.swp
 .VimballRecord
 tmp/undo
+custom-dictionary.utf-8.*
