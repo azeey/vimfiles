@@ -1,0 +1,57 @@
+extends c
+
+snippet mod "module"
+module `!p snip.rv=snip.fn.split('.')[0]` {
+	${VISUAL}${4:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+}
+implementation {
+	${VISUAL}${5:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+}
+
+endsnippet
+
+snippet gmod "generic module"
+generic module `!p snip.rv=snip.fn.split('.')[0]`(${3:arg}) {
+	${VISUAL}${4:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+}
+implementation {
+	${VISUAL}${5:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+}
+endsnippet
+
+snippet conf "configuration"
+configuration `!p snip.rv=snip.fn.split('.')[0]` {
+	${VISUAL}${4:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+}
+implementation {
+	${VISUAL}${5:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+}
+endsnippet
+
+snippet gconf "generic configuration"
+generic configuration `!p snip.rv=snip.fn.split('.')[0]`(${3:arg}) {
+	${VISUAL}${4:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+}
+implementation {
+	${VISUAL}${5:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+}
+endsnippet
+
+snippet prov "Provides"
+provides {
+	interface ${0:name}
+}
+endsnippet
+
+
+snippet uses "Uses"
+uses {
+	interface ${0:name}
+}
+endsnippet
+
+snippet Int "Interface"
+interface `!p snip.rv=snip.fn.split('.')[0]` {
+	${VISUAL}${4:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+}
+endsnippet

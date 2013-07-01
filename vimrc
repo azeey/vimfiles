@@ -60,8 +60,6 @@ set wildmode=list:longest   "make cmdline tab completion similar to bash
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 
-set formatoptions-=o "dont continue comments when pushing o/O
-set formatoptions+=tc "Auto-wrap texts and comments
 
 "some stuff to get the mouse going in term
 set mouse=a
@@ -471,6 +469,7 @@ function! WriteMode()
     set guioptions=aic cc=0 statusline=""
     " Increase font size
     set guifont=Monaco\ 13
+    "set guifont=Inconsolata-dz\ for\ Powerline\ 14
     "Change the colorscheme for Powerline
     let g:Powerline_colorscheme='solarized256_light'
     "Disable statusline
@@ -571,14 +570,14 @@ if has("gui_running")
     set go-=r
     set go-=R
 
-    set guifont=Monaco\ 12
-    "set guifont=Monaco\ 9.5
-    "set guifont=Monaco\ for\ Powerline\ 12.5
-    "set guifont=Menlo\ for\ Powerline\ 11
-    "set guifont=Terminus\ 13.5
-    runtime ftplugin/man.vim
+    "set guifont=Monaco\ 12
+    "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13
+    "set guifont=Inconsolata\ for\ Powerline\ 13
+    set guifont=Inconsolata-dz\ for\ Powerline\ 13
+    "set guifont=Source\ Code\ Pro\ for\ Powerline\ 13
+
+    "runtime ftplugin/man.vim
     "nmap K :Man <cword><CR>
-    "set guifont="Droid Sans Mono"\ 11
     if !exists("g:vimrcloaded")
         winpos 0 0
         if ! &diff
@@ -588,9 +587,16 @@ if has("gui_running")
         endif
         let g:vimrcloaded = 1
     endif
+  colors solarized
+  let g:solarized_visibility='low'
+  let g:solarized_italic = 0
+  set background=light
+  let g:Powerline_colorscheme='solarized16_light'
+  "colors badwolf
+else
+  colors badwolf
 endif
-colors badwolf
-"colors solarized
+
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Addisu's settings
@@ -663,7 +669,7 @@ set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 " n - recon numbered lists
 " v - wrap on blanks
 " t - autowrap TEXT using textwidth
-set fo=crqnvt
+set formatoptions=crqnvt
 
 function! SwitchSourceHeader()
   "update!
@@ -755,10 +761,12 @@ augroup END
 
 " }}}
 " Powerline {{{
+python from powerline.vim import setup as powerline_setup
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_cache_enabled = 1
-call Pl#Theme#InsertSegment('charcode', 'after', 'filetype')
-" let g:Powerline_colorscheme = 'badwolf'
+"call Pl#Theme#InsertSegment('charcode', 'after', 'filetype')
+python powerline_setup()
+python del powerline_setup
 
 " }}}
 " Folding ----------------------------------------------------------------- {{{
@@ -855,6 +863,10 @@ let g:pandoc_auto_format = 1
 " Tlist {{{
 let tlist_nesc_settings='nesC;b:configuration;c:command;d:definition;e:event;f:function;i:interface;m:module;r:result;t:task'
 " }}}
+" Cscope {{{
+nmap <C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
+map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+"}}}
 
 " Filetype-specific ------------------------------------------------------- {{{
 " Binary {{{
