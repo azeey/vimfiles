@@ -4,11 +4,61 @@
 "
 "Preamble ------------------------------------------------------------{{{
 "
-"Initialize pathogen
-call pathogen#infect()
-call pathogen#helptags()
-filetype plugin indent on
+"Initialize vundle
+set nocompatible               " be iMproved
+filetype off                   " required!
 
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'Xerkus/vundle'
+
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-fugitive'
+
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+
+" From vim-scripts
+Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+Bundle 'scratch.vim'
+Bundle 'YankRing.vim'
+Bundle 'Gundo'
+Bundle 'taglist.vim'
+
+" All others
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'austintaylor/vim-commaobject'
+Bundle 'coderifous/textobj-word-column.vim'
+Bundle 'edsono/vim-matchit'
+Bundle 'ervandew/supertab'
+Bundle 'godlygeek/tabular'
+Bundle 'harleypig/ShowMarks'
+Bundle 'ivanov/vim-ipython'
+Bundle 'kana/vim-smartinput'
+Bundle 'kana/vim-textobj-user'
+Bundle 'kien/ctrlp.vim'
+Bundle 'klen/python-mode'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'markabe/bufexplorer'
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'mileszs/ack.vim'
+Bundle 'nelstrom/vim-textobj-rubyblock'
+Bundle 'othree/xml.vim'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'SirVer/ultisnips'
+Bundle 'sjl/badwolf'
+Bundle 'Source-Explorer-srcexpl.vim'
+Bundle 'vim-pandoc/vim-pandoc'
+
+filetype plugin indent on     " required!
 "}}}
 
 let mapleader = ","
@@ -36,8 +86,7 @@ set autoindent
 "set visualbell
 set ttyfast
 set ruler
-set nonumber
-set norelativenumber
+set number
 set undoreload=10000
 set shell=/bin/bash
 set matchtime=3
@@ -573,7 +622,7 @@ if has("gui_running")
     "set guifont=Monaco\ 12
     "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13
     "set guifont=Inconsolata\ for\ Powerline\ 13
-    set guifont=Inconsolata-dz\ for\ Powerline\ 13
+    set guifont=Inconsolata-dz\ for\ Powerline\ 12
     "set guifont=Source\ Code\ Pro\ for\ Powerline\ 13
 
     "runtime ftplugin/man.vim
@@ -858,7 +907,7 @@ nnoremap <silent> <F11> :YRShow<CR>
 "
 " Pandoc {{{
 let g:pandoc_use_hard_wraps = 1
-let g:pandoc_auto_format = 1
+let g:pandoc_auto_format = 0
 " }}}
 " Tlist {{{
 let tlist_nesc_settings='nesC;b:configuration;c:command;d:definition;e:event;f:function;i:interface;m:module;r:result;t:task'
