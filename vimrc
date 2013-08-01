@@ -13,7 +13,7 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'Xerkus/vundle'
+Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
@@ -32,6 +32,7 @@ Bundle 'scratch.vim'
 Bundle 'YankRing.vim'
 Bundle 'Gundo'
 Bundle 'taglist.vim'
+Bundle 'camelcasemotion'
 
 " All others
 Bundle 'altercation/vim-colors-solarized'
@@ -57,6 +58,13 @@ Bundle 'SirVer/ultisnips'
 Bundle 'sjl/badwolf'
 Bundle 'Source-Explorer-srcexpl.vim'
 Bundle 'vim-pandoc/vim-pandoc'
+Bundle 'NesC-Syntax-Highlighting'
+
+"Testing
+"Bundle 'quickfixsigns'
+"Bundle 'tlib'
+"Bundle 'neocomplcache'
+"Bundle 'neocomplcache-snippets_complete'
 
 filetype plugin indent on     " required!
 "}}}
@@ -74,7 +82,7 @@ set backspace=indent,eol,start
 
 set history=1000 " store lots of :cmdline history
 set showcmd      " show incomplete cmds down the bottom
-set showmode     " show current mode down the bottom
+set noshowmode   " Don't show current mode down the bottom
 set incsearch    " find the next match as we type the search
 set hlsearch     " hilight searches by default
 set nowrap       " dont wrap lines
@@ -88,7 +96,7 @@ set ttyfast
 set ruler
 set number
 set undoreload=10000
-set shell=/bin/bash
+set shell=/bin/zsh
 set matchtime=3
 set showbreak=↪
 set splitbelow
@@ -116,11 +124,6 @@ set ttymouse=xterm2
 
 "tell the term has 256 colors
 set t_Co=256
-
-"dont load csapprox if we no gui support - silences an annoying warning
-"if !has("gui")
-let g:CSApprox_loaded = 1
-"endif
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
@@ -296,9 +299,6 @@ set path=.
 " Set the tags files to be the following
 set tags=./tags,tags
 
-" Set shell to zsh
-set shell=/bin/zsh
-
 " Let the syntax highlighting for Java files allow cpp keywords
 let java_allow_cpp_keywords = 1
 
@@ -385,9 +385,6 @@ nmap <silent> ,ul :t.\|s/./=/g\|set nohls<cr>
 " Delete all buffers
 nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
 
-" Syntax coloring lines that are too long just slows down the world
-set synmaxcol=2048
-
 
 " I don't like it when the matching parens are automatically highlighted
 "let loaded_matchparen = 1
@@ -425,9 +422,6 @@ let g:SrcExpl_searchLocalDef = 1
 " Do not let the Source Explorer update the tags file when opening
 let g:SrcExpl_isUpdateTags = 0
 
-" Use program 'ctags' with argument '--sort=foldcase -R' to create or
-" update a tags file
-"let g:SrcExpl_updateTagsCmd = "retag.ksh"
 
 " Set "<F9>" key for updating the tags file artificially
 let g:SrcExpl_updateTagsKey = "<F9>"
@@ -510,20 +504,19 @@ function! FormatCalibration()
 endfunction
 
 function! WriteMode()
-    set background=light
+    setlocal background=light
     let g:solarized_visibility="low"    "default value is normal
     let g:solarized_contrast="normal"
     colorscheme solarized
     hi NonText guifg=bg
-    set guioptions=aic cc=0 statusline=""
+    setlocal guioptions=aic cc=0 statusline=""
     " Increase font size
-    set guifont=Monaco\ 13
-    "set guifont=Inconsolata-dz\ for\ Powerline\ 14
+    set guifont=Inconsolata-dz\ for\ Powerline\ 14
     "Change the colorscheme for Powerline
     let g:Powerline_colorscheme='solarized256_light'
     "Disable statusline
     setlocal statusline=
-    set laststatus=0
+    setlocal laststatus=0
     "No ruler
     setlocal noruler
     setlocal linebreak
@@ -669,7 +662,7 @@ nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
 
 let g:showmarks_enable = 0
 nmap <F3> :ShowMarksToggle<CR>
-"hi SignColumn guibg=NONE
+hi SignColumn guibg=NONE
 nmap <F6> :TlistToggle<CR>
 
 " Set the update time to 500ms so showmarks is more responsive
@@ -690,8 +683,6 @@ autocmd FileType ruby set sw=2 sts=2 ts=2
 autocmd FileType cpp set sw=4 sts=4 ts=4
 autocmd FileType c set sw=4 sts=4 ts=4
 
-"ConqueTerm
-let g:ConqueTerm_TERM='xterm'
 
 " Display <tab>s etc...
 set list
@@ -754,7 +745,7 @@ let g:syntastic_cpp_remove_include_errors=1
 "let g:syntastic_mode_map = { 'mode': 'passive'}
 
 set csto=1
-set nocst
+set cst
 
 " Make supertab not colide with endwise
 let g:SuperTabCrMapping = 0
@@ -792,7 +783,8 @@ nnoremap <c-o> <c-o>zz
 nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 " Ack for the last search.
-nnoremap <silent> <leader>/ :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+"nnoremap <silent> <leader>/ :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+nnoremap <silent> <leader>/ :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "", ""), "\\\\>", "", ""), "\\\\v", "", "") . "'"<CR>
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
@@ -904,7 +896,6 @@ nnoremap <silent> <F11> :YRShow<CR>
   let g:slimv_leader = ';'
   let g:paredit_leader = ';'
 " }}}
-"
 " Pandoc {{{
 let g:pandoc_use_hard_wraps = 1
 let g:pandoc_auto_format = 0
@@ -915,6 +906,21 @@ let tlist_nesc_settings='nesC;b:configuration;c:command;d:definition;e:event;f:f
 " Cscope {{{
 nmap <C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
 map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+"}}}
+"CamelCaseMotion {{{
+    map w <Plug>CamelCaseMotion_w
+    map b <Plug>CamelCaseMotion_b
+    map e <Plug>CamelCaseMotion_e
+    sunmap w
+    sunmap b
+    sunmap e
+    "Replace default |iw| text-object and define |ib| and  |ie| motions: >
+    omap iw <Plug>CamelCaseMotion_iw
+    xmap iw <Plug>CamelCaseMotion_iw
+    omap ib <Plug>CamelCaseMotion_ib
+    xmap ib <Plug>CamelCaseMotion_ib
+    omap ie <Plug>CamelCaseMotion_ie
+    xmap ie <Plug>CamelCaseMotion_ie
 "}}}
 
 " Filetype-specific ------------------------------------------------------- {{{
@@ -1034,9 +1040,9 @@ augroup END
 " }}}
 " }}}
 " TinyOS (nesc) {{{
-augroup ft_nesc
+augroup ft_nc
     au!
-    au BufNewFile,BufRead *.nc set ft=nesc ts=2 sts=2 sw=2
+    au BufNewFile,BufRead *.nc set ft=nc ts=2 sts=2 sw=2
 augroup END
 " }}}
 " }}}
