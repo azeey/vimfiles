@@ -96,7 +96,6 @@ set ttyfast
 set ruler
 set number
 set undoreload=10000
-set shell=/bin/zsh
 set matchtime=3
 set showbreak=↪
 set splitbelow

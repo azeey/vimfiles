@@ -7,8 +7,12 @@ Create symlinks:
     ln -s ~/vim ~/.vim
     ln -s ~/.vim/vimrc ~/.vimrc
 
-Switch to the ~/vim directory, and fetch submodules:
+Install plugins using Vundle
 
-    cd ~/vim
-    git submodule init
-    git submodule update
+    vim +BundleInstall
+
+Some plugins require other programs to be installed in the system:
+
+-   powerline
+-   exuberant-ctags
+-   cscope
