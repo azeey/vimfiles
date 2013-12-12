@@ -11,6 +11,8 @@ filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+"}}}
+"Plugins -------------------------------------------------------------{{{
 " let Vundle manage Vundle
 " required!
 Bundle 'gmarik/vundle'
@@ -39,7 +41,7 @@ Bundle 'austintaylor/vim-commaobject'
 Bundle 'coderifous/textobj-word-column.vim'
 Bundle 'edsono/vim-matchit'
 " For supertab and smartinput, the order matters
-Bundle 'ervandew/supertab'
+"Bundle 'ervandew/supertab'
 Bundle 'kana/vim-smartinput'
 Bundle 'godlygeek/tabular'
 Bundle 'harleypig/ShowMarks'
@@ -65,6 +67,7 @@ Bundle 'myhere/vim-nodejs-complete'
 Bundle 'moll/vim-node'
 Bundle 'jcf/vim-latex'
 Bundle 'pangloss/vim-javascript'
+Bundle 'Valloric/YouCompleteMe'
 
 "Testing
 "Bundle 'quickfixsigns'
@@ -74,22 +77,36 @@ Bundle 'pangloss/vim-javascript'
 
 filetype plugin indent on     " required!
 "}}}
-
+"Leaders -------------------------------------------------------------{{{
 let mapleader = ","
 let maplocalleader = "\\"
+"}}}
+"Options -------------------------------------------------------------{{{
 
-"Use Vim settings, rather then Vi settings (much better!).
 "This must be first, because it changes other options as a side effect.
 set nocompatible
 
-set backspace=indent,eol,start                   " allow backspacing over everything in insert mode
-set history=1000                                 " store lots of :cmdline history
-set showcmd                                      " show incomplete cmds down the bottom
-set noshowmode                                   " Don't show current mode down the bottom
-set incsearch                                    " find the next match as we type the search
-set hlsearch                                     " hilight searches by default
-set nowrap                                       " dont wrap lines
-set linebreak                                    " wrap lines at convenient points
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" store lots of :cmdline history
+set history=1000
+
+" Don't show current mode down the bottom
+set noshowmode
+
+" find the next match as we type the search
+set incsearch
+
+" hilight searches by default
+set hlsearch
+
+" dont wrap lines
+set nowrap
+
+" wrap lines at convenient points
+set linebreak
+
 set encoding=utf-8
 set modelines=0
 set autoindent
@@ -97,38 +114,75 @@ set ttyfast
 set ruler
 set number
 set undoreload=10000
-set matchtime=3
 set showbreak=↪
 set splitbelow
 set splitright
 set fillchars=diff:⣿,vert:│
+
+" Round indent to multiple of 'shiftwidth'. Applies to > and < commands.
 set shiftround
-set title
 set dictionary=/usr/share/dict/words
 set spellfile=~/.vim/custom-dictionary.utf-8.add
-set colorcolumn=+1
-set synmaxcol=800                                " Don't try to highlight lines longer than 800 characters.
-set wildmode=list:longest                        " make cmdline tab completion similar to bash
-set wildmenu                                     " enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~                      " stuff to ignore when tab completing
-set mouse=a                                      " some stuff to get the mouse going in term
-set ttymouse=xterm2
-set t_Co=256                                     " tell the term has 256 colors
-set wrapscan                                     " set the search scan to wrap lines
-set ignorecase                                   " set the search scan so that it ignores case when the search is all lower case but recognizes uppercase if it's specified
-set smartcase
-set shellslash                                   " set the forward slash to be the slash of note.  Backslashes suck
-set ch=2                                         " Make command line two lines high
 
-" Make sure that unsaved buffers that are to be put in the background are
-" allowed to go in there (ie. the "must save first" error doesn't come up)
+" Highlight column after 'textwidth'
+set colorcolumn=+1
+
+" Don't try to highlight lines longer than 800 characters.
+set synmaxcol=800
+
+" make cmdline tab completion similar to bash
+set wildmode=list:longest
+
+" enable ctrl-n and ctrl-p to scroll thru matches
+set wildmenu
+
+" stuff to ignore when tab completing
+set wildignore=*.o,*.obj,*~
+
+" some stuff to get the mouse going in term
+set mouse=a
+
+" tell the term has 256 colors
+set t_Co=256
+
+" set the search scan to wrap lines
+set wrapscan
+
+" set the search scan so that it ignores case when the search is all lower case but recognizes uppercase if it's specified
+set ignorecase
+
+" Override the 'ignorecase' option if the search pattern contains upper case characters.
+set smartcase
+
+" set the forward slash to be the slash of note.  Backslashes suck
+set shellslash
+
+" Make command line two lines high
+set ch=2
+
+" Make sure that unsaved buffers that are to be put in the background are allowed to go in there (ie. the "must save first" error doesn't come up)
 set hidden
 
-set laststatus=2 " tell VIM to always put a status line in, even if there is only one window
-set lazyredraw " Don't update the display while executing macros
-set showcmd " Show the current command in the lower right corner
-syntax on " Switch on syntax highlighting.
-set mousehide " Hide the mouse pointer while typing
+
+" tell VIM to always put a status line in, even if there is only one window
+set laststatus=2
+
+" Don't update the display while executing macros
+set lazyredraw
+
+" Show the current command in the lower right corner
+set showcmd
+
+" Switch on syntax highlighting.
+syntax on
+
+" Hide the mouse pointer while typing
+set mousehide
+
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+"}}}
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
@@ -901,3 +955,11 @@ augroup END
 "augroup END
 
 " }}}
+"
+"
+"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:ycm_server_log_level = 'debug'
+let g:ycm_confirm_extra_conf = 0
