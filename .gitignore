@@ -6,4 +6,4 @@ tmp/undo
 custom-dictionary.utf-8.*
 .NERDTreeBookmarks
 yankring_history_v2.txt
-
+bundle/*
