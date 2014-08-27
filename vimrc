@@ -8,138 +8,149 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
+"}}}
+"Vundle Plugins -------------------------------------------------------------{{{
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-markdown'
-"Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-repeat'
+"Plugin 'tpope/vim-markdown'
+"Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
 
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-"Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/syntastic'
 
 " From vim-scripts
-Bundle 'scratch.vim'
-Bundle 'YankRing.vim'
-Bundle 'Gundo'
-Bundle 'taglist.vim'
-"Bundle 'camelcasemotion'
+Plugin 'scratch.vim'
+Plugin 'YankRing.vim'
+Plugin 'Gundo'
+Plugin 'taglist.vim'
+Plugin 'fontzoom.vim'
+Plugin 'bclear'
+"Plugin 'camelcasemotion'
 
 " All others
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'austintaylor/vim-commaobject'
-Bundle 'coderifous/textobj-word-column.vim'
-Bundle 'edsono/vim-matchit'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'austintaylor/vim-commaobject'
+Plugin 'coderifous/textobj-word-column.vim'
+Plugin 'edsono/vim-matchit'
 " For supertab and smartinput, the order matters
-Bundle 'ervandew/supertab'
-Bundle 'kana/vim-smartinput'
-Bundle 'godlygeek/tabular'
-Bundle 'harleypig/ShowMarks'
-Bundle 'ivanov/vim-ipython'
-Bundle 'kana/vim-textobj-user'
-Bundle 'kien/ctrlp.vim'
-Bundle 'klen/python-mode'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'markabe/bufexplorer'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'mileszs/ack.vim'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-Bundle 'othree/xml.vim'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'SirVer/ultisnips'
-Bundle 'sjl/badwolf'
-Bundle 'Source-Explorer-srcexpl.vim'
-Bundle 'vim-pandoc/vim-pandoc'
-Bundle 'NesC-Syntax-Highlighting'
-Bundle 'bling/vim-airline'
-Bundle 'Shougo/unite.vim'
-Bundle 'myhere/vim-nodejs-complete'
-Bundle 'moll/vim-node'
-Bundle 'jcf/vim-latex'
-Bundle 'pangloss/vim-javascript'
+Plugin 'kana/vim-smartinput'
+Plugin 'ervandew/supertab'
+Plugin 'cohama/vim-smartinput-endwise'
+Plugin 'godlygeek/tabular'
+Plugin 'harleypig/ShowMarks'
+Plugin 'ivanov/vim-ipython'
+Plugin 'kana/vim-textobj-user'
+Plugin 'kien/ctrlp.vim'
+"Plugin 'klen/python-mode'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'markabe/bufexplorer'
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'othree/xml.vim'
+"Plugin 'plasticboy/vim-markdown'
+Plugin 'SirVer/ultisnips'
+Plugin 'sjl/badwolf'
+Plugin 'Source-Explorer-srcexpl.vim'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'NesC-Syntax-Highlighting'
+Plugin 'bling/vim-airline'
+Plugin 'myhere/vim-nodejs-complete'
+Plugin 'moll/vim-node'
+"Plugin 'jcf/vim-latex'
+Plugin 'lervag/vim-latex'
+Plugin 'pangloss/vim-javascript'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Rykka/riv.vim'
+
+Plugin 'majutsushi/vim-textobj-function'
+Plugin 'rosenfeld/conque-term'
+Plugin 'rainbow_parentheses.vim'
+
+"The silver searcher
+Plugin 'rking/ag.vim'
+Plugin 'jshint2.vim'
+Plugin 'tpope/vim-sensible'
+Plugin 'davidhalter/jedi-vim'
 
 "Testing
-"Bundle 'quickfixsigns'
-"Bundle 'tlib'
-"Bundle 'neocomplcache'
-"Bundle 'neocomplcache-snippets_complete'
-
+"Plugin 'quickfixsigns'
+"Plugin 'tlib'
+"Plugin 'neocomplcache'
+"Plugin 'neocomplcache-snippets_complete'
+"Plugin 'nielsadb/df_mode.vim'
+call vundle#end()
 filetype plugin indent on     " required!
 "}}}
-
+"Leaders -------------------------------------------------------------{{{
 let mapleader = ","
 let maplocalleader = "\\"
+"}}}
+"Options -------------------------------------------------------------{{{
 
-"Use Vim settings, rather then Vi settings (much better!).
-"This must be first, because it changes other options as a side effect.
-set nocompatible
+" Don't show current mode down the bottom
+"set noshowmode
 
-set backspace=indent,eol,start                   " allow backspacing over everything in insert mode
-set history=1000                                 " store lots of :cmdline history
-set showcmd                                      " show incomplete cmds down the bottom
-set noshowmode                                   " Don't show current mode down the bottom
-set incsearch                                    " find the next match as we type the search
-set hlsearch                                     " hilight searches by default
-set nowrap                                       " dont wrap lines
-set linebreak                                    " wrap lines at convenient points
-set encoding=utf-8
-set modelines=0
-set autoindent
+" hilight searches by default
+"set hlsearch
+
+" dont wrap lines
+set nowrap
+
 set ttyfast
-set ruler
 set number
-set undoreload=10000
-set matchtime=3
-set showbreak=↪
-set splitbelow
-set splitright
-set fillchars=diff:⣿,vert:│
+set relativenumber
+
+" Round indent to multiple of 'shiftwidth'. Applies to > and < commands.
 set shiftround
-set title
 set dictionary=/usr/share/dict/words
 set spellfile=~/.vim/custom-dictionary.utf-8.add
-set colorcolumn=+1
-set synmaxcol=800                                " Don't try to highlight lines longer than 800 characters.
-set wildmode=list:longest                        " make cmdline tab completion similar to bash
-set wildmenu                                     " enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~                      " stuff to ignore when tab completing
-set mouse=a                                      " some stuff to get the mouse going in term
-set ttymouse=xterm2
-set t_Co=256                                     " tell the term has 256 colors
-set wrapscan                                     " set the search scan to wrap lines
-set ignorecase                                   " set the search scan so that it ignores case when the search is all lower case but recognizes uppercase if it's specified
-set smartcase
-set shellslash                                   " set the forward slash to be the slash of note.  Backslashes suck
-set ch=2                                         " Make command line two lines high
 
-" Make sure that unsaved buffers that are to be put in the background are
-" allowed to go in there (ie. the "must save first" error doesn't come up)
+" Highlight column after 'textwidth'
+set colorcolumn=+1
+
+" Don't try to highlight lines longer than 800 characters.
+set synmaxcol=800
+
+" make cmdline tab completion similar to bash
+set wildmode=list:longest
+
+" enable ctrl-n and ctrl-p to scroll thru matches
+set wildmenu
+
+" stuff to ignore when tab completing
+set wildignore=*.o,*.obj,*~
+
+" some stuff to get the mouse going in term
+set mouse=a
+
+" set the search scan so that it ignores case when the search is all lower case but recognizes uppercase if it's specified
+set ignorecase
+
+" Override the 'ignorecase' option if the search pattern contains upper case characters.
+set smartcase
+
+" Make sure that unsaved buffers that are to be put in the background are allowed to go in there (ie. the "must save first" error doesn't come up)
 set hidden
 
-set laststatus=2 " tell VIM to always put a status line in, even if there is only one window
-set lazyredraw " Don't update the display while executing macros
-set showcmd " Show the current command in the lower right corner
-syntax on " Switch on syntax highlighting.
-set mousehide " Hide the mouse pointer while typing
+
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+"}}}
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
 inoremap <C-L> <C-O>:nohls<CR>
-
-
-"map Q to something useful
-"noremap Q gq
-
-"make Y consistent with C and D
-nnoremap Y y$
 
 "visual search mappings
 function! s:VSetSearch()
@@ -173,14 +184,6 @@ endfunction
 "      timeout expires, one of two things happens: The "," command is executed
 "      if there is one (which there isn't) or the command aborts.
 set timeoutlen=500
-set history=100 " Keep some stuff in the history
-set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo " These commands open folds
-set scrolloff=8 " When the page starts to scroll, keep the cursor 8 lines from the top and 8 lines from the bottom
-set comments=sl:/*,mb:\ *,ex:\ */,O://,b:#,:%,:XCOMM,n:>,fb:- " These things start comment lines
-set key= " Disable encryption (:X)
-set wildmenu " Make the command-line completion better
-set complete=.,w,b,t " Same as default except that I remove the 'u' option
-set showfulltag " When completing by tag, show the whole tag, not just the function name
 set textwidth=120 " Set the textwidth to be 120 chars
 set expandtab " Turn tabs into spaces
 set diffopt+=iwhite " Add ignorance of whitespace to diff
@@ -190,71 +193,56 @@ set path=.  " Initial path seeding
 set tags=./tags,tags,~/tags " Set the tags files to be the following
 
 " Toggle paste mode
-nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+nnoremap <silent> <leader>p :set invpaste<CR>:set paste?<CR>
 
 " cd to the directory containing the file in the buffer
-nmap <silent> ,cd :lcd %:h<CR>
-nmap <silent> ,md :!mkdir -p %:p:h<CR>
+nnoremap <silent> <leader>cd :lcd %:h<CR>
+nnoremap <silent> <leader>md :!mkdir -p %:p:h<CR>
 
 " Turn off that stupid highlight search
-nmap <silent> ,n :set invhls<CR>:set hls?<CR>
+nnoremap <silent> <leader>n :set invhls<CR>:set hls?<CR>
 
 " put the vim directives for my file editing settings in
-nmap <silent> ,vi
+nnoremap <silent> <leader>vi
      \ ovim:set ts=4 sts=4 sw=4:<CR>vim600:fdm=marker fdl=1 fdc=0:<ESC>
 
-" Show all available VIM servers
-nmap <silent> ,ss :echo serverlist()<CR>
-
-" The following beast is something i didn't write... it will return the
-" syntax highlighting group that the current "thing" under the cursor
-" belongs to -- very useful for figuring out what to change as far as
-" syntax highlighting goes.
-nmap <silent> <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
-     \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
-     \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
-     \ . ">"<CR>
-
 " set text wrapping toggles
-nmap <silent> ,w :set invwrap<CR>:set wrap?<CR>
+nnoremap <silent> <leader>w :set invwrap<CR>:set wrap?<CR>
 
 " Run the command that was just yanked
-nmap <silent> ,rc :@"<cr>
+nnoremap <silent> <leader>rc :@"<cr>
 
 " Maps to make handling windows a bit easier
 noremap <silent> <C-F9>  :vertical resize -10<CR>
 noremap <silent> <C-F10> :resize +10<CR>
 noremap <silent> <C-F11> :resize -10<CR>
 noremap <silent> <C-F12> :vertical resize +10<CR>
-noremap <silent> ,s8 :vertical resize 83<CR>
-noremap <silent> ,s1 :vertical resize 123<CR>
+noremap <silent> <leader>s8 :vertical resize 83<CR>
+noremap <silent> <leader>s1 :vertical resize 123<CR>
 
 " Buffer commands
 noremap <silent> ,bd :bd<CR>
 
 " Edit the vimrc file
-nmap <silent> ,ev :e $MYVIMRC<CR>
-nmap <silent> ,sv :so $MYVIMRC<CR>
+nnoremap <silent> <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" Make horizontal scrolling easier
-"nmap <silent> <C-o> 10zl
-"nmap <silent> <C-i> 10zh
 
 "Insert the string under the cursor to the search bar
-":nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+":nnoremap <leader>s :%s/\<<C-r><C-w>\>/
+nnoremap <leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Search the current file for what's currently in the search
 " register and display matches
-nmap <silent> ,gs
+nnoremap <silent> <leader>gs
      \ :vimgrep /<C-r>// %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
 
 " Search the current file for the word under the cursor and display matches
-nmap <silent> ,gw
+nnoremap <silent> <leader>gw
      \ :vimgrep /<C-r><C-w>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
 
 " Search the current file for the WORD under the cursor and display matches
-nmap <silent> ,gW
+nnoremap <silent> <leader>gW
      \ :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
 
 " Swap two words
@@ -264,10 +252,10 @@ nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 nmap <silent> ,ul :t.\|s/./=/g\|set nohls<cr>
 
 " Delete all buffers
-nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
+nnoremap <silent> <leader>da :exec "1," . bufnr('$') . "bd"<cr>
 
 " Select just pasted block
-nmap <silent> vv v']
+nnoremap <silent> vv v']
 
 "-----------------------------------------------------------------------------
 " Functions
@@ -307,7 +295,7 @@ function! WriteMode()
 
 endfunction
 
-nmap <Leader>wm :call WriteMode()<CR>
+nnoremap <leader>wm :call WriteMode()<CR>
 "-----------------------------------------------------------------------------
 " Auto commands
 "-----------------------------------------------------------------------------
@@ -366,14 +354,14 @@ if has("gui_running")
     set go-=r
     set go-=R
 
-    "set guifont=Monaco\ 12
+    "set guifont=Monaco\ 10
     "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13
-    "set guifont=Inconsolata\ for\ Powerline\ 13
-    set guifont=Inconsolata-dz\ for\ Powerline\ 11
-    "set guifont=Source\ Code\ Pro\ for\ Powerline\ 13
+    "set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+    "set guifont=Inconsolata-dz\ for\ Powerline\ 10
+    set guifont=Inconsolata\ for\ Powerline\ 14
 
     "runtime ftplugin/man.vim
-    "nmap K :Man <cword><CR>
+    "nnoremap K :Man <cword><CR>
     if !exists("g:vimrcloaded")
         winpos 0 0
         if ! &diff
@@ -383,15 +371,23 @@ if has("gui_running")
         endif
         let g:vimrcloaded = 1
     endif
-  colors solarized
-  let g:solarized_visibility='low'
-  let g:solarized_italic = 0
-  set background=light
-  let g:airline_theme='solarized'
+
+    "Color scheme {{{
+    "colorscheme solarized
+    "let g:solarized_visibility='low'
+    ""let g:solarized_italic = 0
+    "set background=light
+    "let g:airline_theme='solarized'
+    "}}}
+    colorscheme badwolf
+    let g:airline_theme='badwolf'
+
 else
-  colors badwolf
+  colorscheme badwolf
   let g:airline_theme='badwolf'
+
 endif
+
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
@@ -399,31 +395,30 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 set linespace=0 " Pixels of space between lines
 set cindent
-"let loaded_matchit = 1
 
-nmap <silent> ,hx :%!xxd <CR>
-nmap <silent> ,nhx :%!xxd -r <CR>
-nmap <silent> ,sb :set scb<CR>
-nmap <silent> ,x "_x
+nnoremap <silent> <leader>hx :%!xxd <CR>
+nnoremap <silent> <leader>nhx :%!xxd -r <CR>
+nnoremap <silent> <leader>sb :set scrollbind<CR>
+
 "Highlight or underline
-nmap <silent> ,c :set cursorline! cursorcolumn! <CR>
+nnoremap <silent> <leader>c :set cursorline! cursorcolumn! <CR>
 
 " Clean trailing whitespace
 nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
 
-"set grepprg=ack
-"set grepformat=%f:%l:%c:%m
-
 let g:showmarks_enable = 0
-nmap <F3> :ShowMarksToggle<CR>
+nnoremap <F3> :ShowMarksToggle<CR>
 hi SignColumn guibg=NONE
-nmap <F6> :TlistToggle<CR>
+nnoremap <F6> :TlistToggle<CR>
 
 " Set the update time to 500ms so showmarks is more responsive
 set updatetime=500
 
-"autocmd BufNewFile,BufRead *.mxml,*.as :nmap <C-B> :!bash ~/bin/fcshcmp.sh %:p
-"autocmd BufNewFile,BufRead *.mxml,*.as :nmap <C-B> :!~/bin/fcshcmp.sh %:p run
+" default shiftwidth, softtabstop, and tabstop
+set sw=4 sts=4 ts=4
+
+"autocmd BufNewFile,BufRead *.mxml,*.as :nnoremap <C-B> :!bash ~/bin/fcshcmp.sh %:p
+"autocmd BufNewFile,BufRead *.mxml,*.as :nnoremap <C-B> :!~/bin/fcshcmp.sh %:p run
 
 autocmd FileType ruby set sw=2 sts=2 ts=2
 autocmd FileType cpp set sw=2 sts=2 ts=2
@@ -466,28 +461,31 @@ function! SwitchSourceHeader()
   endif
 endfunction
 
-nmap ,h :call SwitchSourceHeader()<CR>
+nnoremap <leader>h :call SwitchSourceHeader()<CR>
 
-map <silent> <F12> :!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q .<CR>
+"map <silent> <F12> :!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaSl --extra=+q .<CR>
 function! s:Ctag(dir)
-    echomsg "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q " . a:dir
-    exec "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q " . a:dir
+    echomsg "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaSl --extra=+q " . a:dir
+    exec "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaSl --extra=+q " . a:dir
 endfunction
 command! -nargs=1 -complete=dir Ctag call s:Ctag('<args>')
+
+noremap <silent> <F12> :Ctag '.'<CR>
 
 inoremap jj <Esc>
 cnoremap <C-K> <Up>
 cnoremap <C-J> <Down>
-"nmap ; :
-nmap ci; ciw;
-nmap ciw; diwct;
-nmap caw; dawct;
+"nnoremap ; :
+nnoremap ci; ciw;
+nnoremap ciw; diwct;
+nnoremap caw; dawct;
 
 set csto=1
 set cst
 
 " Make supertab not colide with endwise
-let g:SuperTabCrMapping = 0
+"let g:SuperTabCrMapping = 0
+let g:SuperTabDefaultCompletionType = "context"
 let g:SvnVimDiffStyle=""
 
 let ropevim_vim_completion=1
@@ -502,8 +500,8 @@ set backup                        " enable backups
 set noswapfile                    " It's 2012, Vim
 
 "Convert unix epoch time to datetime.  Removes the last 3 digits assuming that they are milliseconds
-nnoremap <Leader>e :echo system("date +%c -u -d @" . <C-r><C-w><del><del><del>)<CR>
-nnoremap <Leader>ec :echo system("date +%c -d @" . <C-r><C-w>)<CR>
+nnoremap <leader>e :echo system("date +%c -u -d @" . <C-r><C-w><del><del><del>)<CR>
+nnoremap <leader>ec :echo system("date +%c -d @" . <C-r><C-w>)<CR>
 
 " Don't move on *
 nnoremap * *<c-o>
@@ -519,9 +517,9 @@ nnoremap <c-o> <c-o>zz
 " Open a Quickfix window for the last search.
 nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
-" Ack for the last search.
-"nnoremap <silent> <leader>/ :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
-nnoremap <silent> <leader>/ :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "", ""), "\\\\>", "", ""), "\\\\v", "", "") . "'"<CR>
+" Agfor the last search.
+"nnoremap <silent> <leader>/ :execute "Ag '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
+nnoremap <silent> <leader>/ :execute "Ag '" . substitute(substitute(substitute(@/, "\\\\<", "", ""), "\\\\>", "", ""), "\\\\v", "", "") . "'"<CR>
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
@@ -545,7 +543,7 @@ let g:airline_powerline_fonts = 1
 " }}}
 " CtrlP {{{
 nnoremap <c-b> :<C-U>CtrlPBuffer<CR>
-nnoremap <Leader>m :<C-U>CtrlPMRU<CR>
+nnoremap <leader>m :<C-U>CtrlPMRU<CR>
 let g:ctrlp_map = '<c-f>'
 "let g:ctrlp_cmd = '<C-U>CtrlPMRU<CR>'
 let g:ctrlp_mruf_relative = 1
@@ -569,28 +567,28 @@ nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 
 " }}}
 " Python-Mode {{{
-let g:pymode_doc = 1
-let g:pymode_doc_key = '<leader>ds'
-let g:pydoc = 'pydoc'
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 0
-let g:pymode_syntax_builtin_objs = 1
-let g:pymode_syntax_print_as_function = 0
-let g:pymode_syntax_space_errors = 0
-let g:pymode_run = 0
-let g:pymode_lint = 0
-let g:pymode_breakpoint = 0
-let g:pymode_utils_whitespaces = 0
-let g:pymode_virtualenv = 0
-let g:pymode_folding = 1
+"let g:pymode_doc = 1
+"let g:pymode_doc_key = '<leader>ds'
+"let g:pydoc = 'pydoc'
+"let g:pymode_syntax = 1
+"let g:pymode_syntax_all = 0
+"let g:pymode_syntax_builtin_objs = 1
+"let g:pymode_syntax_print_as_function = 0
+"let g:pymode_syntax_space_errors = 0
+"let g:pymode_run = 0
+"let g:pymode_lint = 0
+"let g:pymode_breakpoint = 0
+"let g:pymode_utils_whitespaces = 0
+"let g:pymode_virtualenv = 0
+"let g:pymode_folding = 1
 
-let g:pymode_options_indent = 0
-let g:pymode_options_other = 0
+"let g:pymode_options_indent = 0
+"let g:pymode_options_other = 0
 
 let g:pymode_rope = 0
 " }}}
 " Yankring {{{
-nnoremap <silent> <F11> :YRShow<CR>
+"nnoremap <silent> <F11> :YRShow<CR>
 let g:yankring_history_dir = $HOME . '/.vim'
 " }}}
 " Slimv {{{
@@ -605,8 +603,8 @@ let g:pandoc_auto_format = 0
 let tlist_nesc_settings='nesC;b:configuration;c:command;d:definition;e:event;f:function;i:interface;m:module;r:result;t:task'
 " }}}
 " Cscope {{{
-nmap <C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
-map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
+noremap g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
 "}}}
 " CamelCaseMotion {{{
     "map w <Plug>CamelCaseMotion_w
@@ -625,10 +623,10 @@ map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
 "}}}
 " NERDTree {{{
 " Toggle the NERD Tree on an off with F7
-nmap <F7> :NERDTreeToggle<CR>
+nnoremap <F7> :NERDTreeToggle<CR>
 
 " Close the NERD Tree with Shift-F7
-nmap <S-F7> :NERDTreeClose<CR>
+nnoremap <S-F7> :NERDTreeClose<CR>
 
 " Store the bookmarks file in perforce
 let NERDTreeBookmarksFile=$HOME . "/.vim/.NERDTreeBookmarks"
@@ -642,35 +640,6 @@ let NERDTreeIgnore=[ '\.ncb$', '\.suo$', '\.vcproj\.RIMNET', '\.obj$',
             \ '\.embed\.manifest$', '\.embed\.manifest.res$',
             \ '\.intermediate\.manifest$', '^mt.dep$' ]
 
-"}}}
-" Source Explorer {{{
-" The switch of the Source Explorer
-nmap <silent> <F5> :SrcExplToggle<CR>
-
-" Set the height of Source Explorer window
-let g:SrcExpl_winHeight = 16
-
-" Set 10 ms for refreshing the Source Explorer
-let g:SrcExpl_refreshTime = 10
-
-" In order to Avoid conflicts, the Source Explorer should know what plugins
-" are using buffers. And you need add their bufname into the list below
-" according to the command ":buffers!"
-let g:SrcExpl_pluginList = [
-            \ "_NERD_tree_",
-            \ "Source_Explorer"
-            \ ]
-" Enable/Disable the local definition searching, and note that this is not
-" guaranteed to work, the Source Explorer doesn't check the syntax for now.
-" It only searches for a match with the keyword according to command 'gd'
-let g:SrcExpl_searchLocalDef = 1
-
-" Do not let the Source Explorer update the tags file when opening
-let g:SrcExpl_isUpdateTags = 0
-
-
-" Set "<F9>" key for updating the tags file artificially
-let g:SrcExpl_updateTagsKey = "<F9>"
 "}}}
 " Syntastic {{{
 let g:syntastic_quiet_warnings=1
@@ -698,6 +667,21 @@ let g:manpageview_options_py= ";-f;-q"
 let g:manpageview_pgm_rb = "ri"
 let g:manpageview_options_rb= ";-f;-q"
 " }}}
+" YouCompleteMe {{{
+let g:ycm_collect_identifiers_from_tags_files = 1 
+"let g:ycm_server_log_level = 'debug'
+let g:ycm_confirm_extra_conf = 0
+"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" }}}
+" SmartInput {{{
+call smartinput_endwise#define_default_rules()
+" }}}
+" Latex-Suite {{{
+let g:Tex_UseMakefile=1
+" }}}
 "}}}
 
 " Folding ----------------------------------------------------------------- {{{
@@ -709,7 +693,7 @@ nnoremap <Space> za
 vnoremap <Space> za
 
 " "Refocus" folds
-nnoremap ,z zMzvzz
+nnoremap <leader>z zMzvzz
 
 " Make zO recursively open whatever top level fold we're in, no matter where the
 " cursor happens to be.
@@ -786,9 +770,9 @@ augroup ft_vim
     "au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
 " }}}
-" Ack {{{
+" Ag {{{
 
-nnoremap <leader>a :Ack!<space>
+nnoremap <leader>a :Ag<space>
 
 " }}}
 " Python {{{
@@ -817,7 +801,7 @@ augroup ft_mkd
     au!
     " Bolden a word
     au Filetype mkd let b:surround_45 = "**\r**"
-    au Filetype mkd nmap <leader>b ysw-
+    au Filetype mkd nnoremap <leader>b ysw-
 augroup END
 " }}}
 " Pandoc {{{
@@ -825,22 +809,21 @@ augroup ft_pandoc
     au!
     " Bolden a word
     au Filetype pandoc let b:surround_45 = "**\r**"
-    au Filetype pandoc nmap <leader>b ysw-
+    au Filetype pandoc nnoremap <leader>b ysw-
     au Filetype pandoc vmap <leader>b S-
     au Filetype pandoc set tw=120
-    au Filetype pandoc nmap <F2>:PandocPdf<CR>:bd<CR>
+    au Filetype pandoc nnoremap <F2>:PandocPdf<CR>:bd<CR>
     "au Filetype pandoc PandocRegisterExecutor PdcPdf <leader>d pdf 'pandoc -V geometry:margin=1in -o %:r.pdf %%'
-    au Filetype pandoc nmap<silent> <leader>h :!pandoc -t html5 -Ss --mathjax -c ~/css/default.css -c %:p:h/style.css -o %:r.html % <CR><CR>
+    au Filetype pandoc nnoremap<silent> <leader>h :!pandoc -t html5 -Ss --mathjax -c ~/css/default.css -c %:p:h/style.css -o %:r.html % <CR><CR>
 augroup END
 " }}}
 " Latex {{{
 augroup ft_latex
     au!
     au Filetype latex set ts=2 sts=2 sw=2
-    au Filetype latex set makeprg scons
+    "au Filetype latex set makeprg scons
     au Filetype latex map <F2> make<CR>
     au Filetype tex set ts=2 sts=2 sw=2
-    au Filetype tex set makeprg=scons
     au Filetype tex map <F2> :make<CR>
     au Filetype tex let g:Tex_ViewRule_pdf='zathura'
     au Filetype tex set iskeyword+=:
@@ -851,16 +834,16 @@ augroup ft_latex
     au Filetype tex set synmaxcol=0
     au Filetype tex set tw=0 wm=0
 
-    au Filetype tex vmap j gj
-    au Filetype tex vmap k gk
-    au Filetype tex vmap 4 g$
-    au Filetype tex vmap 6 g^
-    au Filetype tex vmap 0 g^
-    au Filetype tex nmap j gj
-    au Filetype tex nmap k gk
-    au Filetype tex nmap 4 g$
-    au Filetype tex nmap 6 g^
-    au Filetype tex nmap 0 g^
+    au Filetype tex vnoremap j gj
+    au Filetype tex vnoremap k gk
+    au Filetype tex vnoremap 4 g$
+    au Filetype tex vnoremap 6 g^
+    au Filetype tex vnoremap 0 g^
+    au Filetype tex nnoremap j gj
+    au Filetype tex nnoremap k gk
+    au Filetype tex nnoremap 4 g$
+    au Filetype tex nnoremap 6 g^
+    au Filetype tex nnoremap 0 g^
 
     au Filetype tex set wrap! nolist! linebreak
 
@@ -875,24 +858,18 @@ augroup END
 " TinyOS (nesc) {{{
 augroup ft_nc
     au!
-    au BufNewFile,BufRead *.nc set ft=nc ts=2 sts=2 sw=2
+    au BufNewFile,BufRead *.nc setlocal ft=nc ts=2 sts=2 sw=2
 augroup END
 " }}}
-" Mxml/ActionScript {{{
-augroup ft_mxml
-au BufNewFile,BufRead *.mxml set filetype=mxml
-au BufNewFile,BufRead *.as set filetype=actionscript
-
-au BufNewFile,BufRead *.mxml set filetype=mxml | execute "compiler ant"
-au BufNewFile,BufRead *.as set filetype=actionscript | execute "compiler ant"
-augroup end
-"}}}
 " Scons {{{
 augroup ft_scons
     au!
     au BufNewFile,BufRead SCons* setf scons
 augroup END
 "}}}
+" Restructured Text {{{
+  au BufNewFile,BufRead *.rst   set filetype=pandoc
+" }}}
 
 "augroup trailing
 "   au!
