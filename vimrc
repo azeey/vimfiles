@@ -667,21 +667,6 @@ let g:manpageview_options_py= ";-f;-q"
 let g:manpageview_pgm_rb = "ri"
 let g:manpageview_options_rb= ";-f;-q"
 " }}}
-" YouCompleteMe {{{
-let g:ycm_collect_identifiers_from_tags_files = 1 
-"let g:ycm_server_log_level = 'debug'
-let g:ycm_confirm_extra_conf = 0
-"
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-" }}}
-" SmartInput {{{
-call smartinput_endwise#define_default_rules()
-" }}}
-" Latex-Suite {{{
-let g:Tex_UseMakefile=1
-" }}}
 "}}}
 
 " Folding ----------------------------------------------------------------- {{{

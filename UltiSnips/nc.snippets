@@ -55,3 +55,37 @@ interface `!p snip.rv=snip.fn.split('.')[0]` {
 	${VISUAL}${4:${VISUAL/(.*)/(?1::\/* code *\/)/}}
 }
 endsnippet
+
+
+snippet led "Led" !b
+components new Msp430GpioC() as Led${1:N}Impl;
+Led$1Impl -> GeneralIOC.Port${2:pin};
+PlatformLedsP.Led$1 -> Led$1Impl;
+
+$0
+endsnippet
+
+snippet test "Test Snippet" !b
+alskdjg
+asdg
+asd
+gas
+dg
+
+
+sdgasdgasdg
+
+a
+sdgasdg
+
+${1:TODO}
+
+sdgalksdjgl kas
+df s
+df
+ sdf sdf
+  sdf sdf 
+
+
+$0
+endsnippet
