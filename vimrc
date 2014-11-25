@@ -45,7 +45,6 @@ Plugin 'coderifous/textobj-word-column.vim'
 Plugin 'edsono/vim-matchit'
 " For supertab and smartinput, the order matters
 Plugin 'kana/vim-smartinput'
-Plugin 'ervandew/supertab'
 Plugin 'cohama/vim-smartinput-endwise'
 Plugin 'godlygeek/tabular'
 Plugin 'ivanov/vim-ipython'
@@ -59,6 +58,7 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'othree/xml.vim'
 "Plugin 'plasticboy/vim-markdown'
 Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets.git'
 Plugin 'sjl/badwolf'
 Plugin 'Source-Explorer-srcexpl.vim'
 Plugin 'vim-pandoc/vim-pandoc'
@@ -69,7 +69,7 @@ Plugin 'moll/vim-node'
 "Plugin 'jcf/vim-latex'
 Plugin 'lervag/vim-latex'
 Plugin 'pangloss/vim-javascript'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'Rykka/riv.vim'
 
 Plugin 'majutsushi/vim-textobj-function'
@@ -80,9 +80,16 @@ Plugin 'rainbow_parentheses.vim'
 Plugin 'rking/ag.vim'
 Plugin 'jshint2.vim'
 Plugin 'tpope/vim-sensible'
-Plugin 'davidhalter/jedi-vim'
+
+
+" YouCompleteMe obsoletes these. Uncomment if YouCompleteMe is removed
+"Plugin 'davidhalter/jedi-vim'
+"Plugin 'ervandew/supertab'
 
 "Testing
+Plugin 'justinmk/vim-sneak'
+"Plugin 'justmao945/vim-clang'
+Plugin 'taketwo/vim-ros'
 "Plugin 'quickfixsigns'
 "Plugin 'tlib'
 "Plugin 'neocomplcache'
@@ -395,6 +402,7 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 set linespace=0 " Pixels of space between lines
 set cindent
+set cinoptions=i-s
 
 nnoremap <silent> <leader>hx :%!xxd <CR>
 nnoremap <silent> <leader>nhx :%!xxd -r <CR>
@@ -667,6 +675,11 @@ let g:manpageview_options_py= ";-f;-q"
 let g:manpageview_pgm_rb = "ri"
 let g:manpageview_options_rb= ";-f;-q"
 " }}}
+" Ultisnips {{{
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" }}}
 "}}}
 
 " Folding ----------------------------------------------------------------- {{{
@@ -811,9 +824,8 @@ augroup ft_latex
     au Filetype tex set ts=2 sts=2 sw=2
     au Filetype tex map <F2> :make<CR>
     au Filetype tex let g:Tex_ViewRule_pdf='zathura'
+    au Filetype tex let g:latex_viewer='zathura'
     au Filetype tex set iskeyword+=:
-    au Filetype tex TTarget pdf
-    au Filetype tex TVTarget pdf
     au Filetype tex set formatoptions-=at
     au Filetype tex set nojoinspaces
     au Filetype tex set synmaxcol=0
@@ -830,7 +842,7 @@ augroup ft_latex
     au Filetype tex nnoremap 6 g^
     au Filetype tex nnoremap 0 g^
 
-    au Filetype tex set wrap! nolist! linebreak
+    au Filetype tex set wrap nolist linebreak
 
 augroup END
 " }}}
