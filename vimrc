@@ -5,97 +5,111 @@
 "Preamble ------------------------------------------------------------{{{
 "
 "Initialize vundle
+if !has('nvim')
 set nocompatible               " be iMproved
+endif
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"call plug#begin('~/.vim/plugged')
+call plug#begin()
 
 "}}}
-"Vundle Plugins -------------------------------------------------------------{{{
-" let Vundle manage Vundle
-" required!
-Plugin 'gmarik/vundle'
+"Plugins -------------------------------------------------------------{{{
 
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-repeat'
-"Plugin 'tpope/vim-markdown'
-"Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+"Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dispatch'
 
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-"Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 
 " From vim-scripts
-Plugin 'scratch.vim'
-Plugin 'YankRing.vim'
-Plugin 'Gundo'
-Plugin 'taglist.vim'
-Plugin 'fontzoom.vim'
-Plugin 'bclear'
-Plugin 'ShowMarks'
-"Plugin 'camelcasemotion'
+Plug 'scratch.vim'
+Plug 'YankRing.vim'
+Plug 'Gundo'
+Plug 'taglist.vim'
+Plug 'fontzoom.vim'
+Plug 'bclear'
+Plug 'ShowMarks'
+"Plug 'camelcasemotion'
 
 " All others
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'austintaylor/vim-commaobject'
-Plugin 'coderifous/textobj-word-column.vim'
-Plugin 'edsono/vim-matchit'
+Plug 'altercation/vim-colors-solarized'
+Plug 'austintaylor/vim-commaobject'
+"Plug 'coderifous/textobj-word-column.vim'
+Plug 'edsono/vim-matchit'
 " For supertab and smartinput, the order matters
-Plugin 'kana/vim-smartinput'
-Plugin 'cohama/vim-smartinput-endwise'
-Plugin 'godlygeek/tabular'
-Plugin 'ivanov/vim-ipython'
-Plugin 'kana/vim-textobj-user'
-Plugin 'kien/ctrlp.vim'
-"Plugin 'klen/python-mode'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'markabe/bufexplorer'
-Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'othree/xml.vim'
-"Plugin 'plasticboy/vim-markdown'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets.git'
-Plugin 'sjl/badwolf'
-Plugin 'Source-Explorer-srcexpl.vim'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'NesC-Syntax-Highlighting'
-Plugin 'bling/vim-airline'
-Plugin 'myhere/vim-nodejs-complete'
-Plugin 'moll/vim-node'
-"Plugin 'jcf/vim-latex'
-Plugin 'lervag/vim-latex'
-Plugin 'pangloss/vim-javascript'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'Rykka/riv.vim'
+Plug 'kana/vim-smartinput'
+Plug 'cohama/vim-smartinput-endwise'
+Plug 'godlygeek/tabular'
+Plug 'ivanov/vim-ipython'
+"Plug 'kana/vim-textobj-user'
+Plug 'kien/ctrlp.vim'
+"Plug 'klen/python-mode'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'markabe/bufexplorer'
+Plug 'michaeljsmith/vim-indent-object'
+"Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'othree/xml.vim'
+"Plug 'plasticboy/vim-markdown'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'sjl/badwolf'
+Plug 'Source-Explorer-srcexpl.vim'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'NesC-Syntax-Highlighting'
+Plug 'bling/vim-airline'
+Plug 'myhere/vim-nodejs-complete'
+Plug 'moll/vim-node'
+"Plug 'jcf/vim-latex'
+Plug 'lervag/vim-latex'
+Plug 'pangloss/vim-javascript'
+Plug 'Valloric/YouCompleteMe'
+"Plug 'Rykka/riv.vim'
 
-Plugin 'majutsushi/vim-textobj-function'
-Plugin 'rosenfeld/conque-term'
-Plugin 'rainbow_parentheses.vim'
+"Plug 'majutsushi/vim-textobj-function'
+Plug 'rosenfeld/conque-term'
+Plug 'rainbow_parentheses.vim'
 
 "The silver searcher
-Plugin 'rking/ag.vim'
-Plugin 'jshint2.vim'
-Plugin 'tpope/vim-sensible'
+Plug 'rking/ag.vim'
+Plug 'jshint2.vim'
+Plug 'tpope/vim-sensible'
+Plug 'airblade/vim-gitgutter'
 
 
-" YouCompleteMe obsoletes these. Uncomment if YouCompleteMe is removed
-"Plugin 'davidhalter/jedi-vim'
-"Plugin 'ervandew/supertab'
+"Plug 'davidhalter/jedi-vim'
+"Plug 'ervandew/supertab'
 
 "Testing
-Plugin 'justinmk/vim-sneak'
-"Plugin 'justmao945/vim-clang'
-Plugin 'taketwo/vim-ros'
-"Plugin 'quickfixsigns'
-"Plugin 'tlib'
-"Plugin 'neocomplcache'
-"Plugin 'neocomplcache-snippets_complete'
-"Plugin 'nielsadb/df_mode.vim'
-call vundle#end()
+Plug 'justinmk/vim-sneak'
+"Plug 'justmao945/vim-clang'
+Plug 'taketwo/vim-ros'
+"Plug 'quickfixsigns'
+"Plug 'tlib'
+"Plug 'nielsadb/df_mode.vim'
+"Plug 'jalcine/cmake.vim', {'pinned': 1} "Until I get a new version of vim with the 'uniq' function
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'tmhedberg/SimpylFold'
+
+Plug 'benekastah/neomake'
+
+"Rust plugins"
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'timonv/vim-cargo'
+
+Plug 'chrisbra/NrrwRgn'
+
+call plug#end()
+
+runtime! plugin/sensible.vim
+
 filetype plugin indent on     " required!
 "}}}
 "Leaders -------------------------------------------------------------{{{
@@ -190,8 +204,16 @@ endfunction
 "      "," key and the "d" key.  If the "d" key isn't pressed before the
 "      timeout expires, one of two things happens: The "," command is executed
 "      if there is one (which there isn't) or the command aborts.
+
+if has('nvim')
+    set ttimeout
+    set ttimeoutlen=0
+    tnoremap <Esc> <C-\><C-n>
+endif
+
 set timeoutlen=500
-set textwidth=120 " Set the textwidth to be 120 chars
+
+"set textwidth=120 " Set the textwidth to be 120 chars
 set expandtab " Turn tabs into spaces
 set diffopt+=iwhite " Add ignorance of whitespace to diff
 set hlsearch " Enable search highlighting
@@ -403,6 +425,8 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 set linespace=0 " Pixels of space between lines
 set cindent
 set cinoptions=i-s
+" Follow google c++ style guide
+set cinoptions=g1,h1-s,N-s
 
 nnoremap <silent> <leader>hx :%!xxd <CR>
 nnoremap <silent> <leader>nhx :%!xxd -r <CR>
@@ -471,10 +495,9 @@ endfunction
 
 nnoremap <leader>h :call SwitchSourceHeader()<CR>
 
-"map <silent> <F12> :!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaSl --extra=+q .<CR>
 function! s:Ctag(dir)
     echomsg "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaSl --extra=+q " . a:dir
-    exec "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaSl --extra=+q " . a:dir
+    exec "!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaSl --extra=+q --langmap=c++:+.inl " . a:dir
 endfunction
 command! -nargs=1 -complete=dir Ctag call s:Ctag('<args>')
 
@@ -531,7 +554,7 @@ nnoremap <silent> <leader>/ :execute "Ag '" . substitute(substitute(substitute(@
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
-" Plugins ----------------------------------------------------------------- {{{
+" Plugin Settings ----------------------------------------------------------------- {{{
 " Line Return {{{
 
 " Make sure Vim returns to the same line when you reopen a file.
@@ -552,6 +575,7 @@ let g:airline_powerline_fonts = 1
 " CtrlP {{{
 nnoremap <c-b> :<C-U>CtrlPBuffer<CR>
 nnoremap <leader>m :<C-U>CtrlPMRU<CR>
+"nnoremap <c-m> :<C-U>CtrlPMRU<CR>
 let g:ctrlp_map = '<c-f>'
 "let g:ctrlp_cmd = '<C-U>CtrlPMRU<CR>'
 let g:ctrlp_mruf_relative = 1
@@ -603,6 +627,9 @@ let g:yankring_history_dir = $HOME . '/.vim'
   let g:slimv_leader = ';'
   let g:paredit_leader = ';'
 " }}}
+" Vim-Ipython {{{
+let g:ipy_perform_mappings=0
+" }}}
 " Pandoc {{{
 let g:pandoc_use_hard_wraps = 1
 let g:pandoc_auto_format = 0
@@ -650,15 +677,17 @@ let NERDTreeIgnore=[ '\.ncb$', '\.suo$', '\.vcproj\.RIMNET', '\.obj$',
 
 "}}}
 " Syntastic {{{
-let g:syntastic_quiet_warnings=1
-let g:syntastic_cpp_no_include_search=1
-"let g:syntastic_auto_loc_list=1
-let g:syntastic_cpp_remove_include_errors=1
-let g:syntastic_enable_signs=1
-let g:syntastic_python_checker_args="--good-names=x,y,z,i,j,k"
-let g:syntastic_disabled_filetypes = ['c', 'cpp']
-let g:syntastic_c_include_dirs=[$HOME . '/code/node/src/']
-let g:syntastic_cpp_include_dirs=[$HOME . '/code/node/src/']
+
+nnoremap <F5> :SyntasticToggleMode<CR>
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_cpp_checkers = ["cpplint"]
+let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_enable_highlighting = 0
+let g:syntastic_enable_signs = 0
+
 " }}}
 " Gundo {{{
 "Gundo mapping
@@ -679,6 +708,15 @@ let g:manpageview_options_rb= ";-f;-q"
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" }}}
+" YouCompleteMe {{{
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_always_populate_location_list = 0
+let g:ycm_enable_diagnostic_highlighting = 1
+" let g:ycm_show_diagnostics_ui = 0
+" }}}
+" Vim-Racer {{{
+let $RUST_SRC_PATH=expand("~/downloads/src/rustc-1.4.0/src/")
 " }}}
 "}}}
 
@@ -734,13 +772,18 @@ augroup Binary
 augroup END
 
 "" }}}
-" C {{{
+" C and C++ {{{
 
 augroup ft_c
     au!
     au FileType c setlocal foldmethod=syntax
 augroup END
 
+augroup ft_cpp
+    au!
+    au FileType cpp setlocal foldmethod=syntax sw=2 sts=2 ts=2 tw=80
+    au FileType cpp let NERDSpaceDelims=1
+augroup END
 " }}}
 " QuickFix {{{
 
@@ -783,6 +826,7 @@ augroup ft_python
     au Filetype python setlocal foldmethod=expr
     " Use the same mapping as slimv for vim-ipython
     au Filetype python map ;s <C-s>
+    au FileType python let g:ultisnips_python_style = "numpy"
 augroup END
 " }}}
 " Lisp {{{
@@ -875,3 +919,9 @@ augroup END
 "augroup END
 
 " }}}
+
+" Use clipboard
+if !has('nvim')
+    set clipboard=unnamedplus
+endif
+
