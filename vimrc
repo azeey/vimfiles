@@ -99,11 +99,6 @@ Plug 'tmhedberg/SimpylFold'
 
 Plug 'benekastah/neomake'
 
-"Rust plugins"
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'timonv/vim-cargo'
-
 Plug 'chrisbra/NrrwRgn'
 
 call plug#end()
