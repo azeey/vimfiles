@@ -36,19 +36,16 @@ Plug 'taglist.vim'
 Plug 'fontzoom.vim'
 Plug 'bclear'
 Plug 'ShowMarks'
-"Plug 'camelcasemotion'
 
 " All others
 Plug 'altercation/vim-colors-solarized'
 Plug 'austintaylor/vim-commaobject'
-"Plug 'coderifous/textobj-word-column.vim'
 Plug 'edsono/vim-matchit'
 " For supertab and smartinput, the order matters
 Plug 'kana/vim-smartinput'
 Plug 'cohama/vim-smartinput-endwise'
 Plug 'godlygeek/tabular'
 Plug 'ivanov/vim-ipython'
-"Plug 'kana/vim-textobj-user'
 Plug 'kien/ctrlp.vim'
 "Plug 'klen/python-mode'
 Plug 'Lokaltog/vim-easymotion'
@@ -66,14 +63,9 @@ Plug 'NesC-Syntax-Highlighting'
 Plug 'bling/vim-airline'
 Plug 'myhere/vim-nodejs-complete'
 Plug 'moll/vim-node'
-"Plug 'jcf/vim-latex'
-Plug 'lervag/vim-latex'
 Plug 'pangloss/vim-javascript'
 Plug 'Valloric/YouCompleteMe'
-"Plug 'Rykka/riv.vim'
 
-"Plug 'majutsushi/vim-textobj-function'
-Plug 'rosenfeld/conque-term'
 Plug 'rainbow_parentheses.vim'
 
 "The silver searcher
@@ -81,10 +73,6 @@ Plug 'rking/ag.vim'
 Plug 'jshint2.vim'
 Plug 'tpope/vim-sensible'
 Plug 'airblade/vim-gitgutter'
-
-
-"Plug 'davidhalter/jedi-vim'
-"Plug 'ervandew/supertab'
 
 "Testing
 Plug 'justinmk/vim-sneak'
@@ -100,6 +88,9 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'benekastah/neomake'
 
 Plug 'chrisbra/NrrwRgn'
+Plug 'mikewest/vimroom'
+Plug 'mmai/vim-zenmode'
+Plug 'edkolev/tmuxline.vim'
 
 call plug#end()
 
@@ -121,8 +112,6 @@ let maplocalleader = "\\"
 
 " dont wrap lines
 set nowrap
-
-set ttyfast
 set number
 set relativenumber
 
@@ -292,30 +281,50 @@ function! RunSystemCall(systemcall)
 endfunction
 
 function! WriteMode()
-    setlocal background=light
+    set background=light
     let g:solarized_visibility="low"    "default value is normal
     let g:solarized_contrast="normal"
-    colorscheme solarized
-    hi NonText guifg=bg
-    setlocal guioptions=aic cc=0 statusline=""
-    " Increase font size
-    "set guifont=Inconsolata-dz\ for\ Powerline\ 14
-    "Change the colorscheme for Airline
-    let g:airline_theme='solarized'
 
-    "Disable statusline
-    setlocal statusline=
-    setlocal laststatus=0
-    "No ruler
-    setlocal noruler
-    setlocal linebreak
-    "Disable textwidth column
-    setlocal colorcolumn=0 tw=120
-    "Disable list chars
-    setlocal nolist
-    setlocal nocursorline
-    setlocal nowrap
-    setlocal spell
+    colorscheme solarized
+    "let g:color_name="solarized"
+    let g:vimroom_guibackground="#fdf6e3"
+    "let g:vimroom_guibackground="#657b83"
+    set guifont=Inconsolata-dz\ for\ Powerline\ 14
+    "call <SID>ZenmodeToggle()<CR>
+    AirlineToggle
+    set statusline=
+
+    VimroomToggle
+
+    "hi NonText guifg=bg
+    "setlocal guioptions=aic cc=0 statusline=""
+    "" Increase font size
+    ""Change the colorscheme for Airline
+    "let g:airline_theme='solarized'
+
+    ""Disable statusline
+    "set statusline=
+    "set showtabline=0
+    ""No ruler
+    "set noruler
+    "set nolinebreak
+    ""Disable textwidth column
+    "setlocal colorcolumn=0 tw=0
+    ""Disable list chars
+    set nolist
+    set nocursorline
+    set wrap
+    set spell
+    set nonu
+    set nornu
+    "setlocal foldcolumn=4
+    "highlight! link FoldColumn Normal
+    "setlocal wrapmargin=8
+
+    nnoremap j gj
+    nnoremap k gk
+    nnoremap $ g$
+    nnoremap ^ g^
 
 endfunction
 
@@ -407,6 +416,8 @@ if has("gui_running")
     let g:airline_theme='badwolf'
 
 else
+  "let g:airline_theme='solarized'
+  "colorscheme solarized
   colorscheme badwolf
   let g:airline_theme='badwolf'
 
@@ -431,7 +442,7 @@ nnoremap <silent> <leader>sb :set scrollbind<CR>
 nnoremap <silent> <leader>c :set cursorline! cursorcolumn! <CR>
 
 " Clean trailing whitespace
-nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
+nnoremap <silent> <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
 
 let g:showmarks_enable = 0
 nnoremap <F3> :ShowMarksToggle<CR>
@@ -477,7 +488,7 @@ set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 " n - recon numbered lists
 " v - wrap on blanks
 " t - autowrap TEXT using textwidth
-set formatoptions=crqnvt
+set formatoptions=crqnvtw
 
 function! SwitchSourceHeader()
   "update!
@@ -508,15 +519,6 @@ nnoremap caw; dawct;
 
 set csto=1
 set cst
-
-" Make supertab not colide with endwise
-"let g:SuperTabCrMapping = 0
-let g:SuperTabDefaultCompletionType = "context"
-let g:SvnVimDiffStyle=""
-
-let ropevim_vim_completion=1
-let ropevim_extended_complete=1
-
 
 set undofile
 set undodir=~/.vim/tmp/undo//     " undo files
@@ -592,27 +594,6 @@ endfunction
 
 nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 
-" }}}
-" Python-Mode {{{
-"let g:pymode_doc = 1
-"let g:pymode_doc_key = '<leader>ds'
-"let g:pydoc = 'pydoc'
-"let g:pymode_syntax = 1
-"let g:pymode_syntax_all = 0
-"let g:pymode_syntax_builtin_objs = 1
-"let g:pymode_syntax_print_as_function = 0
-"let g:pymode_syntax_space_errors = 0
-"let g:pymode_run = 0
-"let g:pymode_lint = 0
-"let g:pymode_breakpoint = 0
-"let g:pymode_utils_whitespaces = 0
-"let g:pymode_virtualenv = 0
-"let g:pymode_folding = 1
-
-"let g:pymode_options_indent = 0
-"let g:pymode_options_other = 0
-
-let g:pymode_rope = 0
 " }}}
 " Yankring {{{
 "nnoremap <silent> <F11> :YRShow<CR>
@@ -870,17 +851,6 @@ augroup ft_latex
     au Filetype tex set synmaxcol=0
     au Filetype tex set tw=0 wm=0
 
-    au Filetype tex vnoremap j gj
-    au Filetype tex vnoremap k gk
-    au Filetype tex vnoremap 4 g$
-    au Filetype tex vnoremap 6 g^
-    au Filetype tex vnoremap 0 g^
-    au Filetype tex nnoremap j gj
-    au Filetype tex nnoremap k gk
-    au Filetype tex nnoremap 4 g$
-    au Filetype tex nnoremap 6 g^
-    au Filetype tex nnoremap 0 g^
-
     au Filetype tex set wrap nolist linebreak
 
 augroup END
@@ -906,12 +876,6 @@ augroup END
 " Restructured Text {{{
   au BufNewFile,BufRead *.rst   set filetype=pandoc
 " }}}
-
-"augroup trailing
-"   au!
-"   au InsertEnter * :set listchars-=trail:⌴
-"   au InsertLeave * :set listchars+=trail:⌴
-"augroup END
 
 " }}}
 
