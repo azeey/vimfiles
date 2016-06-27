@@ -7,12 +7,10 @@ Create symlinks:
     ln -s ~/vim ~/.vim
     ln -s ~/.vim/vimrc ~/.vimrc
 
-Install plugins using Vundle
+Install plugins using Vim Plug
 
-    vim +BundleInstall
+    vim +PlugInstall
 
 Some plugins require other programs to be installed in the system:
 
--   powerline
 -   exuberant-ctags
--   cscope
