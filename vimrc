@@ -31,7 +31,8 @@ Plug 'scrooloose/syntastic'
 " From vim-scripts
 Plug 'scratch.vim'
 Plug 'YankRing.vim'
-Plug 'Gundo'
+" Plug 'Gundo'
+Plug 'simnalamburt/vim-mundo' " Fork of Gundo
 Plug 'taglist.vim'
 Plug 'fontzoom.vim'
 Plug 'bclear'
@@ -61,6 +62,7 @@ Plug 'Source-Explorer-srcexpl.vim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'NesC-Syntax-Highlighting'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'myhere/vim-nodejs-complete'
 Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
@@ -82,7 +84,7 @@ Plug 'taketwo/vim-ros'
 "Plug 'tlib'
 "Plug 'nielsadb/df_mode.vim'
 "Plug 'jalcine/cmake.vim', {'pinned': 1} "Until I get a new version of vim with the 'uniq' function
-Plug 'vim-pandoc/vim-pandoc-syntax'
+"Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'tmhedberg/SimpylFold'
 
 Plug 'benekastah/neomake'
@@ -91,6 +93,8 @@ Plug 'chrisbra/NrrwRgn'
 Plug 'mikewest/vimroom'
 Plug 'mmai/vim-zenmode'
 Plug 'edkolev/tmuxline.vim'
+Plug 'ReplaceWithRegister'
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 call plug#end()
 
@@ -151,7 +155,6 @@ set hidden
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-"}}}
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
@@ -270,6 +273,9 @@ nnoremap <silent> <leader>da :exec "1," . bufnr('$') . "bd"<cr>
 " Select just pasted block
 nnoremap <silent> vv v']
 
+" When you forget to sudo
+cmap w!! w !sudo tee % > /dev/null
+
 "-----------------------------------------------------------------------------
 " Functions
 "-----------------------------------------------------------------------------
@@ -367,61 +373,11 @@ iab unnec     unnecessary
 "}}}
 "-----------------------------------------------------------------------------
 " Set up the window colors and size
-"-----------------------------------------------------------------------------
-if has("gui_running")
-    " Set up the gui cursor to look nice
-    set guicursor=n-v-c:block-Cursor-blinkon0
-    set guicursor+=ve:ver35-Cursor
-    set guicursor+=o:hor50-Cursor
-    set guicursor+=i-ci:ver25-Cursor
-    set guicursor+=r-cr:hor20-Cursor
-    set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+"let g:airline_theme='solarized'
+"colorscheme solarized
+colorscheme badwolf
+let g:airline_theme='badwolf'
 
-    "set guicursor=n-c:block-Cursor-blinkon0
-    "set guicursor+=v:block-vCursor-blinkon0
-    "set guicursor+=i-ci:ver20-iCursor
-
-    set go-=T
-    set go-=l
-    set go-=L
-    set go-=r
-    set go-=R
-
-    "set guifont=Monaco\ 10
-    "set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13
-    "set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
-    "set guifont=Inconsolata-dz\ for\ Powerline\ 10
-    set guifont=Inconsolata\ for\ Powerline\ 14
-
-    "runtime ftplugin/man.vim
-    "nnoremap K :Man <cword><CR>
-    if !exists("g:vimrcloaded")
-        winpos 0 0
-        if ! &diff
-            winsize 130 90
-        else
-            winsize 227 90
-        endif
-        let g:vimrcloaded = 1
-    endif
-
-    "Color scheme {{{
-    "colorscheme solarized
-    "let g:solarized_visibility='low'
-    ""let g:solarized_italic = 0
-    "set background=light
-    "let g:airline_theme='solarized'
-    "}}}
-    colorscheme badwolf
-    let g:airline_theme='badwolf'
-
-else
-  "let g:airline_theme='solarized'
-  "colorscheme solarized
-  colorscheme badwolf
-  let g:airline_theme='badwolf'
-
-endif
 
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -551,6 +507,14 @@ nnoremap <silent> <leader>/ :execute "Ag '" . substitute(substitute(substitute(@
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
+" Use clipboard
+if !has('nvim')
+    set clipboard=unnamedplus
+endif
+
+set modelines=0
+"}}}
+
 " Plugin Settings ----------------------------------------------------------------- {{{
 " Line Return {{{
 
@@ -660,14 +624,20 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_checkers = ["cpplint"]
-let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ["flake8"]
+let g:syntastic_python_flake8_args = "--ignore F401"
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_enable_signs = 0
 
 " }}}
+" Surround {{{
+" Use the surround plugin to create markers
+let g:surround_99 = "<!--{{{--> \r <!--}}}-->"
+" }}}
 " Gundo {{{
 "Gundo mapping
-nnoremap <F4> :GundoToggle<CR>
+" nnoremap <F4> :GundoToggle<CR>
+nnoremap <F4> :MundoToggle<CR>
 " }}}
 " BufExplorer {{{
 "map to bufexplorer
@@ -693,6 +663,13 @@ let g:ycm_enable_diagnostic_highlighting = 1
 " }}}
 " Vim-Racer {{{
 let $RUST_SRC_PATH=expand("~/downloads/src/rustc-1.4.0/src/")
+" }}}
+" Vim-ROS {{{
+let g:ros_build_system='catkin-tools'
+" }}}
+" Yapf {{{
+map <c-y> :call yapf#YAPF()<cr>
+imap <c-y> <c-o>:call yapf#YAPF()<cr>
 " }}}
 "}}}
 
@@ -729,10 +706,6 @@ endfunction " }}}
 set foldtext=MyFoldText()
 
 " }}}
-
-" Use the surround plugin to create markers
-
-let g:surround_99 = "<!--{{{--> \r <!--}}}-->"
 
 " Filetype-specific ------------------------------------------------------- {{{
 " Binary {{{
@@ -878,9 +851,3 @@ augroup END
 " }}}
 
 " }}}
-
-" Use clipboard
-if !has('nvim')
-    set clipboard=unnamedplus
-endif
-
