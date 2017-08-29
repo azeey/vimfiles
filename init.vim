@@ -1,1 +1,1 @@
-/home/addisu/.vimrc
+vimrc
